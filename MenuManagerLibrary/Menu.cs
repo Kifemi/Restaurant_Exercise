@@ -45,27 +45,34 @@ namespace MenuManagerLibrary
         {
             while (true)
             {
-                if(Categories.Count > 0)
+                if(this.Categories.Count > 0)
                 {
-                    Console.WriteLine($"To which category {dish.Name} is added? (1-{Categories.Count}) ");
+                    Console.WriteLine($"To which category {dish.Name} is added? (1-{this.Categories.Count}) ");
                     int categoryNumber = Convert.ToInt32(Console.ReadLine());
-                    if (categoryNumber < 0 || categoryNumber >= Categories.Count)
+                    if (categoryNumber < 0 || categoryNumber >= this.Categories.Count)
                     {
-                        Console.WriteLine($"Invalid feed. Please write a number from 1 to {Categories.Count}");
+                        Console.WriteLine($"Invalid feed. Please write a number from 1 to {this.Categories.Count}");
                         continue;
                     }
                     else
                     {
-                        Categories[categoryNumber - 1].ListOfDishes.Add(dish);
+                        this.Categories[categoryNumber - 1].ListOfDishes.Add(dish);
                         break;
                     }
                 }
 
-                Categories[0].ListOfDishes.Add(dish);
+                this.Categories[0].ListOfDishes.Add(dish);
                 break;
                     
             }
         }
+
+        public void AddCategory()
+        {
+            Console.WriteLine("Name of the new category: ");
+            this.categories.Add(new Category(Console.ReadLine()));
+        }
+
 
         /// <summary>
         /// Creates preset catogories, mainly for testing purposes
@@ -73,17 +80,17 @@ namespace MenuManagerLibrary
         public void SetPresetCategories()
         {
             Category appetizers = new Category("Appetizers");
-            categories.Add(appetizers);
+            this.categories.Add(appetizers);
             Category mainCourses = new Category("Main Courses");
-            categories.Add(mainCourses);
+            this.categories.Add(mainCourses);
             Category desserts = new Category("Desserts");
-            categories.Add(desserts);
+            this.categories.Add(desserts);
             Category kidsMenu = new Category("Kid's Menu");
-            categories.Add(kidsMenu);
+            this.categories.Add(kidsMenu);
             Category drinks = new Category("Drinks");
-            categories.Add(drinks);
+            this.categories.Add(drinks);
             Category others = new Category("Others");
-            categories.Add(others);
+            this.categories.Add(others);
 
         }
 
@@ -92,7 +99,7 @@ namespace MenuManagerLibrary
         /// </summary>
         public void PrintMenu()
         {
-            foreach (Category item in Categories)
+            foreach (Category item in this.Categories)
             {
                 Console.WriteLine(item.Name);
                 if(item.ListOfDishes.Count == 0)
