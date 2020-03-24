@@ -4,7 +4,7 @@ using System.Text;
 
 namespace MenuManagerLibrary
 {
-    class Dish
+    public class Dish
     {
         public string Name { get; set; }
         public string Description { get; set; }
@@ -16,5 +16,8 @@ namespace MenuManagerLibrary
             this.Description = description;
             this.Price = price;
         }
+
+
+
     }
 }
