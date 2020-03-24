@@ -17,6 +17,11 @@ namespace MenuManagerLibrary
             this.Price = price;
         }
 
+        public string GetDishInfo()
+        {
+            return ($"{this.Name} - {this.Price}€\n{this.Description}\n");
+        }
+
 
 
     }

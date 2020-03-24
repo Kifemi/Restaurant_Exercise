@@ -4,7 +4,7 @@ using System.Text;
 
 namespace MenuManagerLibrary
 {
-    class Menu
+    public class Menu
     {
         private string name;
 
@@ -26,7 +26,6 @@ namespace MenuManagerLibrary
         {
             this.Name = name;
             this.Categories = new List<Category>();
-            this.Categories.Add(new Category("Others"));
         }
 
         /// <summary>
@@ -48,7 +47,7 @@ namespace MenuManagerLibrary
             {
                 if(Categories.Count > 0)
                 {
-                    Console.WriteLine($"To which category the food is added? (1-{Categories.Count}) ");
+                    Console.WriteLine($"To which category {dish.Name} is added? (1-{Categories.Count}) ");
                     int categoryNumber = Convert.ToInt32(Console.ReadLine());
                     if (categoryNumber < 0 || categoryNumber >= Categories.Count)
                     {
@@ -71,21 +70,44 @@ namespace MenuManagerLibrary
         /// <summary>
         /// Creates preset catogories, mainly for testing purposes
         /// </summary>
-        public void InitializeCategories()
+        public void SetPresetCategories()
         {
-            Category appetizers = new Category();
+            Category appetizers = new Category("Appetizers");
             categories.Add(appetizers);
-            Category mainCourses = new Category();
+            Category mainCourses = new Category("Main Courses");
             categories.Add(mainCourses);
-            Category desserts = new Category();
+            Category desserts = new Category("Desserts");
             categories.Add(desserts);
-            Category kidsMenu = new Category();
+            Category kidsMenu = new Category("Kid's Menu");
             categories.Add(kidsMenu);
-            Category drinks = new Category();
+            Category drinks = new Category("Drinks");
             categories.Add(drinks);
-            Category others = new Category();
+            Category others = new Category("Others");
             categories.Add(others);
 
+        }
+
+        /// <summary>
+        /// For testing
+        /// </summary>
+        public void PrintMenu()
+        {
+            foreach (Category item in Categories)
+            {
+                Console.WriteLine(item.Name);
+                if(item.ListOfDishes.Count == 0)
+                {
+                    Console.WriteLine("---");
+                }
+                else
+                {
+                    
+                    foreach (Dish item1 in item.ListOfDishes)
+                    {
+                        Console.WriteLine(item1.Name);
+                    }
+                }
+            }
         }
     }
 }

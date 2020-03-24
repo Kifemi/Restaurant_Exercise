@@ -14,12 +14,12 @@ namespace MenuManagerLibrary
 			set { name = value; }
 		}
 
-		private List<Dish> dishes;
+		private List<Dish> listOfDishes;
 
 		public List<Dish> ListOfDishes
 		{
-			get { return dishes; }
-			set { dishes = value; }
+			get { return listOfDishes; }
+			set { listOfDishes = value; }
 		}
 
 		public Category(string name)
