@@ -13,10 +13,11 @@ namespace MenuManagerUI
             menu.SetPresetCategories();
             List<Dish> dishes = new List<Dish>();
             menu.Categories[1].ListOfDishes.Add(new Dish("Haggis", "I dare you", 15));
-            menu.Categories[2].ListOfDishes.Add(new Dish("Maggara", "I dare you", 14.54));
+            menu.Categories[1].ListOfDishes.Add(new Dish("vodka", "I dare you", 6.7));
+            menu.Categories[1].ListOfDishes.Add(new Dish("Maggara", "I dare you", 14.54));
             menu.Categories[3].ListOfDishes.Add(new Dish("sgwgwgw", "I dare you", 43));
             menu.Categories[0].ListOfDishes.Add(new Dish("sushi", "I dare you", 3));
-            menu.Categories[4].ListOfDishes.Add(new Dish("vodka", "I dare you", 6.7));
+            
 
             List<Dish> fullListOfDishes = menu.CombineCategoriesToList();
             Menu.PrintMenuAlphabeticalOrder(fullListOfDishes);
@@ -27,13 +28,7 @@ namespace MenuManagerUI
 
 
 
-            //Console.WriteLine(dish.GetDishInfo());
-
-            //menu.AddDish(dish);
-
-            //menu.AddDishToCategory(dish);
-
-            //menu.PrintMenu();
+          
 
 
 

@@ -22,6 +22,10 @@ namespace MenuManagerLibrary
             set { categories = value; }
         }
 
+        /// <summary>
+        /// Constructor for the menu
+        /// </summary>
+        /// <param name="name"></param>
         public Menu(string name)
         {
             this.Name = name;
@@ -67,6 +71,9 @@ namespace MenuManagerLibrary
             }
         }
 
+        /// <summary>
+        /// Asks user to write name for the category and creates new category
+        /// </summary>
         public void AddCategory()
         {
             Console.WriteLine("Name of the new category: ");

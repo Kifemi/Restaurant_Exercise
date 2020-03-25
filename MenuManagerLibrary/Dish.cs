@@ -10,6 +10,12 @@ namespace MenuManagerLibrary
         public string Description { get; set; }
         public double Price { get; set; }
 
+        /// <summary>
+        /// Constructor for the dish
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="description"></param>
+        /// <param name="price"></param>
         public Dish(string name, string description, double price)
         {
             this.Name = name;
@@ -61,10 +67,12 @@ namespace MenuManagerLibrary
 
         //=====================================================================================
         //=====================================================================================
-        public string GetDishInfo()
-        {
-            return ($"{this.Name} - {this.Price}€\n{this.Description}\n");
-        }
+
+
+        //public string GetDishInfo()
+        //{
+        //    return ($"{this.Name} - {this.Price}€\n{this.Description}\n");
+        //}
 
         public static Dish CreateNewDish()
         {

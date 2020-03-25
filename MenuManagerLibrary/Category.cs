@@ -22,6 +22,10 @@ namespace MenuManagerLibrary
 			set { listOfDishes = value; }
 		}
 
+		/// <summary>
+		/// Constructor for the category
+		/// </summary>
+		/// <param name="name"></param>
 		public Category(string name)
 		{
 			this.Name = name;
