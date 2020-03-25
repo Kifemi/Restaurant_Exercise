@@ -4,7 +4,7 @@ using System.Text;
 
 namespace MenuManagerLibrary
 {
-    public class Dish : IEquatable<Dish>, IComparable<Dish>
+    public class Dish
     {
         public string Name { get; set; }
         public string Description { get; set; }
@@ -30,40 +30,6 @@ namespace MenuManagerLibrary
         {
             return ($"{this.Name} - {this.Price}€\n{this.Description}\n");
         }
-
-        public override bool Equals(object obj)
-        {
-            if (obj == null) return false;
-            Dish objAsPart = obj as Dish;
-            if (objAsPart == null) return false;
-            else return Equals(objAsPart);
-        }
-        public int SortByNameAscending(string name1, string name2)
-        {
-
-            return name1.CompareTo(name2);
-        }
-
-        // Default comparer for Part type.
-        public int CompareTo(Dish comparePart)
-        {
-            // A null value means that this object is greater.
-            if (comparePart == null)
-                return 1;
-
-            else
-                return this.Price.CompareTo(comparePart.Price);
-        }
-        public override int GetHashCode()
-        {
-            return Convert.ToInt32(Price);
-        }
-        public bool Equals(Dish other)
-        {
-            if (other == null) return false;
-            return (this.Price.Equals(other.Price));
-        }
-        // Should also override == and != operators.
 
         //=====================================================================================
         //=====================================================================================

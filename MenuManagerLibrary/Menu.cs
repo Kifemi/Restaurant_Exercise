@@ -138,13 +138,12 @@ namespace MenuManagerLibrary
         /// <param name="list"></param>
         public static void PrintMenuAlphabeticalOrder(List<Dish> list)
         {
-            list.Sort(delegate (Dish dish1, Dish dish2)
-            {
-                if (dish1.Name == null && dish2.Name == null) return 0;
-                else if (dish1.Name == null) return -1;
-                else if (dish2.Name == null) return 1;
-                else return dish1.Name.CompareTo(dish2.Name);
-            });
+            list.Sort(
+                delegate (Dish dish1, Dish dish2)
+                    {
+                            return dish1.Name.CompareTo(dish2.Name);
+                    }
+            );
 
             foreach (Dish dish in list)
             {
@@ -159,7 +158,12 @@ namespace MenuManagerLibrary
         /// <param name="list"></param>
         public static void PrintMenuPriceOrder(List<Dish> list)
         {
-            list.Sort();
+            list.Sort(
+                delegate (Dish dish1, Dish dish2)
+                    {
+                        return dish1.Price.CompareTo(dish2.Price);
+                    }
+            );
 
             foreach (Dish dish in list)
             {
