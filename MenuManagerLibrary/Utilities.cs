@@ -20,26 +20,27 @@ namespace MenuManagerLibrary
         public static List<double> SortListDouble(List<double> list)
         {
             List<double> sortedList = new List<double>();
+            List<double> tempList = new List<double>(list);
             int minIndex = 0;
             double minValue;
-            int numberOfIterations = list.Count;
+            int numberOfIterations = tempList.Count;
 
             for (int i = 0; i < numberOfIterations; i++)
             {
-                minValue = list[0];
+                minValue = tempList[0];
                 minIndex = 0;
 
-                for (int j = 1; j < list.Count; j++)
+                for (int j = 1; j < tempList.Count; j++)
                 {
-                    if(minValue > list[j])
+                    if(minValue > tempList[j])
                     {
-                        minValue = list[j];
+                        minValue = tempList[j];
                         minIndex = j;
                     }
                 }
 
-                sortedList.Add(list[minIndex]);
-                list.RemoveAt(minIndex);
+                sortedList.Add(tempList[minIndex]);
+                tempList.RemoveAt(minIndex);
             }
 
             return sortedList;
