@@ -116,5 +116,22 @@ namespace MenuManagerLibrary
                 }
             }
         }
+
+        public void PrintMenuAlphabeticalOrder()
+        {
+
+        }
+
+        public void PrintMenuPriceOrder()
+        {
+
+        }
+
+        public void PrintMenuCategoryOrder()
+        {
+
+        }
+
+
     }
 }
