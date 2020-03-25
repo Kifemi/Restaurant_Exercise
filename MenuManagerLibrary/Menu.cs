@@ -77,7 +77,15 @@ namespace MenuManagerLibrary
         public void AddCategory()
         {
             Console.WriteLine("Name of the new category: ");
-            this.categories.Add(new Category(Console.ReadLine()));
+            if(Categories.Count == 0)
+            {
+                this.Categories.Add(new Category(Console.ReadLine()));
+            }
+            else
+            {
+                this.Categories.Insert(Categories.Count - 1, new Category(Console.ReadLine()));
+            }
+            
         }
 
 
@@ -146,7 +154,7 @@ namespace MenuManagerLibrary
 
 
         /// <summary>
-        /// Prints all of the dishes from the menu from the cheapest to the most expensive
+        /// Prints all of the dishes in the menu from the cheapest to the most expensive
         /// </summary>
         /// <param name="list"></param>
         public static void PrintMenuPriceOrder(List<Dish> list)

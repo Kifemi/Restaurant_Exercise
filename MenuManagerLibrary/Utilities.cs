@@ -24,18 +24,41 @@ namespace MenuManagerLibrary
         {
             if (string.IsNullOrEmpty(str))
                 return string.Empty;
-            // convert to char array of the string
+            
             char[] letters = str.ToCharArray();
-            // upper case the first char
+            
             letters[0] = char.ToUpper(letters[0]);
-            // return the array made of the new char array
+            
             return new string(letters);
         }
 
-        public void PrintHelp()
+        public static string TrimInput()
         {
+            string inputTrimmed = ToLowerCase(TrimString(Console.ReadLine()));
+            return inputTrimmed;
+        }
 
-        }     
+        //public void PrintHelp()
+        //{
+        //    Console.WriteLine("Commands: \n" +
+        //        "\t add\n" +
+        //        "\t print\n" +
+        //        "\t help\n" +
+        //        "\t exit");
+
+        //    string input = TrimInput();
+
+        //    if (input.Equals("add"))
+        //    {
+        //        Console.WriteLine("Add options: \n" +
+        //        "\t menu --- creates new menu\n" +
+        //        "\t category --- adds new category to a menu\n" +
+        //        "\t dish --- adds new dish to a menu or a category\n" +
+        //        "\t back --- return to previous menu");
+        //    }
+
+               
+        //}     
 
     }
 }
