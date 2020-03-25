@@ -23,18 +23,13 @@ namespace MenuManagerLibrary
             this.Price = price;
         }
 
-        //=====================================================================================
-        //Modifying Sort()- method 
-        //=====================================================================================
+        
         public override string ToString()
         {
             return ($"{this.Name} - {this.Price}€\n{this.Description}\n");
         }
 
-        //=====================================================================================
-        //=====================================================================================
-
-
+       
         //public string GetDishInfo()
         //{
         //    return ($"{this.Name} - {this.Price}€\n{this.Description}\n");
