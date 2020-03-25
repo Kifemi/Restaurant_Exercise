@@ -18,10 +18,11 @@ namespace MenuManagerLibrary
         }
 
         //=====================================================================================
-
+        //Modifying Sort()- method 
+        //=====================================================================================
         public override string ToString()
         {
-            return ($"nimi: {this.Name} --- hinta: {this.Price}");
+            return ($"{this.Name} - {this.Price}€\n{this.Description}\n");
         }
 
         public override bool Equals(object obj)
@@ -58,6 +59,7 @@ namespace MenuManagerLibrary
         }
         // Should also override == and != operators.
 
+        //=====================================================================================
         //=====================================================================================
         public string GetDishInfo()
         {

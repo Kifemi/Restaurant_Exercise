@@ -117,21 +117,70 @@ namespace MenuManagerLibrary
             }
         }
 
-        public void PrintMenuAlphabeticalOrder()
+        /// <summary>
+        /// Prints all of the dishes from the menu in alphabetical order
+        /// </summary>
+        /// <param name="list"></param>
+        public static void PrintMenuAlphabeticalOrder(List<Dish> list)
         {
+            list.Sort(delegate (Dish dish1, Dish dish2)
+            {
+                if (dish1.Name == null && dish2.Name == null) return 0;
+                else if (dish1.Name == null) return -1;
+                else if (dish2.Name == null) return 1;
+                else return dish1.Name.CompareTo(dish2.Name);
+            });
 
+            foreach (Dish dish in list)
+            {
+                Console.WriteLine(dish);
+            }
         }
 
-        public void PrintMenuPriceOrder()
-        {
 
+        /// <summary>
+        /// Prints all of the dishes from the menu from the cheapest to the most expensive
+        /// </summary>
+        /// <param name="list"></param>
+        public static void PrintMenuPriceOrder(List<Dish> list)
+        {
+            list.Sort();
+
+            foreach (Dish dish in list)
+            {
+                Console.WriteLine(dish);
+            }
         }
 
+        /// <summary>
+        /// Prints all of the dishes from the menu, one category at the time
+        /// </summary>
+        /// <param name="menu"></param>
         public void PrintMenuCategoryOrder()
         {
-
+            foreach (Category category in this.Categories)
+            {
+                PrintMenuAlphabeticalOrder(category.ListOfDishes);
+            }
         }
 
+        /// <summary>
+        /// Combines all dishes in menu's categories to one list
+        /// </summary>
+        /// <returns></returns>
+        public List<Dish> CombineCategoriesToList()
+        {
+            List<Dish> fullList = new List<Dish>();
 
+            foreach (Category category in this.Categories)
+            {
+                foreach (Dish dish in category.ListOfDishes)
+                {
+                    fullList.Add(dish);
+                }
+            }
+
+            return fullList;
+        }
     }
 }
