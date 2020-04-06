@@ -1,14 +1,34 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Caliburn.Micro;
 
 namespace MenuManagerLibrary
 {
     public class Dish
     {
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public double Price { get; set; }
+        private string _name;
+        private string _description;
+        private double _price;
+
+        public string Name
+        {
+            get { return _name; }
+            set { _name = value; }
+        }
+
+        public string Description
+        {
+            get { return _description; }
+            set { _description = value; }
+        }
+
+        public double Price
+        {
+            get { return _price; }
+            set { _price = value; }
+        }
+
 
         /// <summary>
         /// Constructor for the dish
