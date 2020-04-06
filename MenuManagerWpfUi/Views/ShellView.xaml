@@ -4,14 +4,11 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MenuManagerWpfUi.Views"
-        mc:Ignorable="d"
-        Title="ShellView" Height="450" Width="800">
+        mc:Ignorable="d" Background="AliceBlue"
+        Title="Menu Manager" Height="450" Width="800">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20"/>
-            <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="20"/>
@@ -19,34 +16,17 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="20"/>
             <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
 
         <!--Row 1-->
-        <ListBox Grid.Row="1" Grid.Column="1"
-                 Grid.RowSpan="3" Grid.ColumnSpan="1" x:Name="Dishes"
-                 SelectedItem="{Binding Path=SelectedDish, Mode=OneWayToSource}"
-                 DisplayMemberPath="Name">
-        </ListBox>
-
-        <TextBlock Grid.Row="1" Grid.Column="2" 
-                   Text="Name" MinWidth="100" />
-        <TextBlock Grid.Row="1" Grid.Column="3" 
-                   Text="Description" MinWidth="100"/>
-        <TextBlock Grid.Row="1" Grid.Column="4" 
-                   Text="Price" MinWidth="100" />
-        
+        <Button x:Name="ShowMenu" Grid.Row="1" Grid.Column="1">
+            Show Menu
+        </Button>
+                
         <!--Row 2-->
-        <TextBlock Grid.Row="2" Grid.Column="2" 
-                   Text="{Binding Path = SelectedDish.Name}"/>
-        <TextBlock Grid.Row="2" Grid.Column="3" 
-                   Text="{Binding Path = SelectedDish.Description}"/>
-        <TextBlock Grid.Row="2" Grid.Column="4" 
-                   Text="{Binding Path = SelectedDish.Price, StringFormat={}{0}€}"/>
-        
-        <!--Row 3-->
-        
+        <ContentControl Grid.Row="2" Grid.Column="2"
+                        x:Name="ActiveItem" />
     </Grid>
 </Window>
