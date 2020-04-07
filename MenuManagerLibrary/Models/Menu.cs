@@ -9,16 +9,15 @@ namespace MenuManagerLibrary
     public class Menu
     {
         private string _name;
-        private List<Category> _categories;
         private string _description;
+        private List<Category> _categories;
         private List<Dish> _menuDishList;
 
-        public List<Dish> MenuDishList
+        public string Name
         {
-            get { return _menuDishList; }
-            set { _menuDishList = value; }
+            get { return _name; }
+            set { _name = value; }
         }
-
 
         public string Description
         {
@@ -26,17 +25,26 @@ namespace MenuManagerLibrary
             set { _description = value; }
         }
 
-        public string Name
-        {
-            get { return _name; }
-            set { _name = value; }
-        }
-            
         public List<Category> Categories
         {
             get { return _categories; }
             set { _categories = value; }
         }
+
+        public List<Dish> MenuDishList
+        {
+            get { return _menuDishList; }
+            set { _menuDishList = value; }
+        }
+
+        
+
+        
+            
+        
+
+
+        // Constructors for Menu
 
         public Menu(string name)
         {
@@ -52,7 +60,7 @@ namespace MenuManagerLibrary
 
         
 
-        
+        // Methods 
 
         /// <summary>
         /// Prints all of the dishes from the menu in alphabetical order

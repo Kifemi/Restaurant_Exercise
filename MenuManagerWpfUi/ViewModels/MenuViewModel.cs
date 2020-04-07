@@ -49,18 +49,18 @@ namespace MenuManagerWpfUi.ViewModels
 
         // Methods
 
-        public bool CanShowDishes()
-        {
-            if (menus[0].MenuDishList.Count == 0)
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
+        //public bool CanShowDishes()
+        //{
+        //    if (menus[0].MenuDishList.Count == 0)
+        //    {
+        //        return false;
+        //    }
+        //    else
+        //    {
+        //        return true;
+        //    }
 
-        }
+        //}
 
         public void ShowDishes()
         {
