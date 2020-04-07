@@ -11,11 +11,21 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="100" />
+            <ColumnDefinition Width="100" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="20"/>
+        </Grid.ColumnDefinitions>
 
         <!--Row 1-->
 
-        <DataGrid ItemsSource="{Binding Dishes}" CanUserAddRows="False" 
+        <DataGrid Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3"
+                  ItemsSource="{Binding Dishes}" CanUserAddRows="False" 
                   Margin="10" AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Name" Binding="{Binding Path=Name}" />
@@ -24,31 +34,12 @@
             </DataGrid.Columns>
         </DataGrid>
         
-        <!--<ListBox Grid.Row="2" Grid.Column="2"
-                  Grid.RowSpan ="2" MinWidth="100" ItemsSource="{Binding Dishes}"
-                 SelectedItem="{Binding Path=SelectedDish, Mode=OneWayToSource}">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <TextBlock Text="{Binding Name}"/>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>-->
-
-        <!--<TextBlock Grid.Row="1" Grid.Column="3" 
-                   Text="Name" MinWidth="100" />
-        <TextBlock Grid.Row="1" Grid.Column="4" 
-                   Text="Description" MinWidth="100"/>
-        <TextBlock Grid.Row="1" Grid.Column="5" 
-                   Text="Price" MinWidth="100" />
-
-        --><!--Row 2--><!--
-        <TextBlock Grid.Row="2" Grid.Column="3"
-                   Text="{Binding Path = SelectedDish.Name}"/>
-        <TextBlock Grid.Row="2" Grid.Column="4" 
-                   Text="{Binding Path = SelectedDish.Description}"/>
-        <TextBlock Grid.Row="2" Grid.Column="5" 
-                   Text="{Binding Path = SelectedDish.Price, StringFormat={}{0}€}"/>
-
-        <TextBlock Grid.Row="3" Grid.Column="4" Text="{Binding Path=SelectedDish.Name}"/>-->
+        <!--Row 2-->
+        <Button Grid.Row="3" Grid.Column="1" Margin="10">
+            Add Dish
+        </Button>
+        <Button Grid.Row="3" Grid.Column="2" Margin="10">
+            Remove Dish
+        </Button>
     </Grid>
 </UserControl>
