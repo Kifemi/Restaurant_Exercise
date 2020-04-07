@@ -21,8 +21,8 @@
         </Grid.RowDefinitions>
 
         <!--Row 1-->
-        <Button x:Name="ShowMenu" Grid.Row="1" Grid.Column="1">
-            Show Menu
+        <Button x:Name="ShowMenus" Grid.Row="1" Grid.Column="1">
+            Show Menus
         </Button>
                 
         <!--Row 2-->

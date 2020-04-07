@@ -3,23 +3,25 @@ using System.Collections.Generic;
 using System.Text;
 using Caliburn.Micro;
 using MenuManagerLibrary;
+using MenuManagerWpfUi.ViewModels;
 
 namespace MenuManagerWpfUi.ViewModels
 {
     public class DishViewModel : Conductor<object>
     {
-        private BindableCollection<Dish> _dishes;
         private Dish _selectedDish;
 
-        public DishViewModel()
+        public BindableCollection<Dish> Dishes { get; set; }        
+
+        public DishViewModel(MenuManager menuManager)
         {
-            Dishes = new BindableCollection<Dish>();
-            Dishes.Add(new Dish("Haggis", "I dare you", 15));
-            Dishes.Add(new Dish("Vodka", "I dare you", 6.7));
-            Dishes.Add(new Dish("Maggara", "I dare you", 4.7));
-            Dishes.Add(new Dish("Sushi", "I dare you", 9.50));
-            Dishes.Add(new Dish("Nakit ja muusi", "I dare you", 8.0));
+            Dishes = new BindableCollection<Dish>(menuManager.Dishes);
         }
+
+        public DishViewModel(MenuManager menuManager, Menu menu)
+        {
+            Dishes = new BindableCollection<Dish>(menu.MenuDishList);
+        }       
 
         public Dish SelectedDish
         {
@@ -31,10 +33,5 @@ namespace MenuManagerWpfUi.ViewModels
             }
         }
 
-        public BindableCollection<Dish> Dishes
-        {
-            get { return _dishes; }
-            set { _dishes = value; }
-        }
     }
 }

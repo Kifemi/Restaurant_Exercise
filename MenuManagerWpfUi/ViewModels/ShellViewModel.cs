@@ -8,14 +8,22 @@ namespace MenuManagerWpfUi.ViewModels
 {
     public class ShellViewModel : Conductor<object>
     {
-
+        private MenuManager menuManager;
         
 
-        public void ShowMenu()
+        public ShellViewModel()
         {
-            ActivateItemAsync(new DishViewModel(), System.Threading.CancellationToken.None);
-        }
+            this.menuManager = new MenuManager();
             
+           
+        }
+
+
+        public void ShowMenus()
+        {
+            ActivateItemAsync(new MenuViewModel(menuManager), System.Threading.CancellationToken.None);
+        }
+
 
 
     }

@@ -26,9 +26,13 @@
 
         <!--Row 1-->
         <ListBox Grid.Row="2" Grid.Column="2"
-                 Grid.RowSpan="3" MinWidth="100" x:Name="Dishes"
-                 SelectedItem="{Binding Path=SelectedDish, Mode=OneWayToSource}"
-                 DisplayMemberPath="Name">
+                 Grid.RowSpan="3" MinWidth="100" ItemsSource="{Binding Dishes}"
+                 SelectedItem="{Binding Path=SelectedDish, Mode=OneWayToSource}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Name}"/>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
         </ListBox>
 
         <TextBlock Grid.Row="1" Grid.Column="3" 

@@ -7,6 +7,8 @@ namespace MenuManagerLibrary
     public class Category
     {
 		private string name;
+		private string _description;
+		private List<Dish> listOfDishes;
 
 		public string Name
 		{
@@ -14,18 +16,18 @@ namespace MenuManagerLibrary
 			set { name = value; }
 		}
 
-		private List<Dish> listOfDishes;
-
 		public List<Dish> ListOfDishes
 		{
 			get { return listOfDishes; }
 			set { listOfDishes = value; }
 		}
 
-		/// <summary>
-		/// Constructor for the category
-		/// </summary>
-		/// <param name="name"></param>
+		public string Description
+		{
+			get { return _description; }
+			set { _description = value; }
+		}
+
 		public Category(string name)
 		{
 			this.Name = name;
