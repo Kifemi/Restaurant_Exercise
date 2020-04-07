@@ -49,5 +49,7 @@
                    Text="{Binding Path = SelectedDish.Description}"/>
         <TextBlock Grid.Row="2" Grid.Column="5" 
                    Text="{Binding Path = SelectedDish.Price, StringFormat={}{0}€}"/>
+
+        <TextBlock Grid.Row="3" Grid.Column="4" Text="{Binding Path=SelectedDish.Name}"/>
     </Grid>
 </UserControl>

@@ -11,20 +11,30 @@ namespace MenuManagerWpfUi.ViewModels
         private MenuManager menuManager;
         
 
+
+
+        // Constructor for ShellViewModel
+
         public ShellViewModel()
         {
             this.menuManager = new MenuManager();
-            
+            DataHandler.FillDishesWithDemoData(this.menuManager);
            
         }
 
 
+
+
+
+        // Methods
+
         public void ShowMenus()
         {
-            ActivateItemAsync(new MenuViewModel(menuManager), System.Threading.CancellationToken.None);
+            ActivateItemAsync(new MenuViewModel(this.menuManager), System.Threading.CancellationToken.None);
         }
 
 
+        
 
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Caliburn.Micro;
+using MenuManagerLibrary;
 
 namespace MenuManagerLibrary
 {
@@ -43,10 +44,13 @@ namespace MenuManagerLibrary
             this.MenuDishList = new List<Dish>();
         }
 
-        public void AddDish(Dish dish)
+        public Menu(string name, List<Dish> menuDishList)
         {
-            Categories[Categories.Count - 1].ListOfDishes.Add(dish);
+            this.Name = name;
+            this.MenuDishList = menuDishList;
         }
+
+        
 
         
 

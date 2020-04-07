@@ -10,18 +10,9 @@ namespace MenuManagerWpfUi.ViewModels
     public class DishViewModel : Conductor<object>
     {
         private Dish _selectedDish;
-
-        public BindableCollection<Dish> Dishes { get; set; }        
-
-        public DishViewModel(MenuManager menuManager)
-        {
-            Dishes = new BindableCollection<Dish>(menuManager.Dishes);
-        }
-
-        public DishViewModel(MenuManager menuManager, Menu menu)
-        {
-            Dishes = new BindableCollection<Dish>(menu.MenuDishList);
-        }       
+        private Menu _selectedMenu;
+        private MenuManager _selecterMenuManager;
+        public BindableCollection<Dish> Dishes { get; set; }
 
         public Dish SelectedDish
         {
@@ -32,6 +23,49 @@ namespace MenuManagerWpfUi.ViewModels
                 NotifyOfPropertyChange(() => SelectedDish);
             }
         }
+
+        public Menu SelectedMenu
+        {
+            get { return _selectedMenu; }
+            set
+            {
+                _selectedMenu = value;
+                NotifyOfPropertyChange(() => SelectedMenu);
+            }
+        }
+
+        public MenuManager SelectedMenuManager
+        {
+            get { return _selecterMenuManager; }
+            set
+            {
+                _selecterMenuManager = value;
+                NotifyOfPropertyChange(() => SelectedMenuManager);
+            }
+        }
+
+        
+
+
+
+        // Constructors for DishViewModel      
+
+        public DishViewModel(MenuManager menuManager)
+        {
+            Dishes = new BindableCollection<Dish>(menuManager.Dishes);
+        }
+
+        public DishViewModel(MenuManager menuManager, Menu menu)
+        {
+            SelectedMenuManager = menuManager;
+            Dishes = new BindableCollection<Dish>(menu.MenuDishList);         
+        }       
+
+
+
+        // Methods
+
+        
 
     }
 }

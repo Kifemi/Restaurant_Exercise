@@ -11,14 +11,7 @@ namespace MenuManagerWpfUi.ViewModels
     {
         private Menu _selectedMenu;
         private MenuManager _selectedMenuManager;
-        public BindableCollection<Menu> menus { get; set; }
-        
-        
-        public MenuViewModel(MenuManager menuManager)
-        {
-            menus = new BindableCollection<Menu>(menuManager.FillDishesWithDemoData());
-            SelectedMenuManager = menuManager;
-        }    
+        public BindableCollection<Menu> menus { get; set; }      
 
         public MenuManager SelectedMenuManager
         {
@@ -40,9 +33,38 @@ namespace MenuManagerWpfUi.ViewModels
             } 
         }
 
-        public void ShowDishes(MenuManager SelectedMenuManager, Menu SelectedMenu)
+
+
+
+        // Constructor for MenuViewModel
+
+        public MenuViewModel(MenuManager menuManager)
         {
-            ActivateItemAsync(new DishViewModel(SelectedMenuManager, SelectedMenu), System.Threading.CancellationToken.None);
+            menus = new BindableCollection<Menu>(menuManager.allMenus);
+            SelectedMenuManager = menuManager;
+        }
+
+
+
+
+        // Methods
+
+        public bool CanShowDishes()
+        {
+            if (menus[0].MenuDishList.Count == 0)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+
+        }
+
+        public void ShowDishes()
+        {
+            ActivateItemAsync(new DishViewModel(SelectedMenuManager, this.SelectedMenu), System.Threading.CancellationToken.None);
         }
     }
 }
