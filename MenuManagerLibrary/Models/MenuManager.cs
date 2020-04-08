@@ -14,7 +14,10 @@ namespace MenuManagerLibrary
 		public List<Dish> Dishes
 		{
 			get { return _dishes; }
-			set { _dishes = value; }
+			set
+			{
+				_dishes = value;
+			}
 		}
 
 

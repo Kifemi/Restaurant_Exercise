@@ -11,7 +11,10 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="50"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="40"/>
             <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -26,7 +29,8 @@
 
         <DataGrid Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" 
                   ItemsSource="{Binding Dishes}" CanUserAddRows="False" 
-                  Margin="10" AutoGenerateColumns="False">
+                  Margin="10" AutoGenerateColumns="False"
+                  SelectedItem="{Binding Path=SelectedDish, Mode=OneWayToSource}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Name" Binding="{Binding Path=Name}" />
                 <DataGridTextColumn Header="Description" Binding="{Binding Path=Description}" />
@@ -34,11 +38,20 @@
             </DataGrid.Columns>
         </DataGrid>
         
-        <!--Row 2-->
-        <Button Grid.Row="3" Grid.Column="1" Margin="10">
+        <!--Row 3-->
+        <TextBox x:Name="DishName" Grid.Row="3" Grid.Column="1"/>
+
+        <!--Row 4-->
+        <TextBox x:Name="DishDescription" Grid.Row="4" Grid.Column="1"/>
+
+        <!--Row 5-->
+        <TextBox x:Name="DishPrice" Grid.Row="5" Grid.Column="1"/>
+        
+        <!--Row 6-->
+        <Button Grid.Row="6" Grid.Column="1" Margin="10" x:Name="AddDishButton">
             Add Dish
         </Button>
-        <Button Grid.Row="3" Grid.Column="2" Margin="10">
+        <Button Grid.Row="6" Grid.Column="2" Margin="10" x:Name="RemoveDishButton">
             Remove Dish
         </Button>
     </Grid>

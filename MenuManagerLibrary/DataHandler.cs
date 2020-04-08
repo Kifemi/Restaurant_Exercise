@@ -9,16 +9,27 @@ namespace MenuManagerLibrary
     {
         public static void AddDish(MenuManager menuManager, Menu menu, Dish dish)
         {
-            if (!menu.MenuDishList.Contains(dish))
+            if (menu == null)
             {
-                menu.MenuDishList.Add(dish);
+                if (!menuManager.Dishes.Contains(dish))
+                {
+                    menuManager.Dishes.Add(dish);
+                }
+            }
+            else
+            {
+                if (!menu.MenuDishList.Contains(dish))
+                {
+                    menu.MenuDishList.Add(dish);
+                }
+
+
+                if (!menuManager.Dishes.Contains(dish))
+                {
+                    menuManager.Dishes.Add(dish);
+                }
             }
             
-
-            if (!menuManager.Dishes.Contains(dish))
-            {
-                menuManager.Dishes.Add(dish);
-            }
         }
 
         public static void FillDishesWithDemoData(MenuManager menuManager)

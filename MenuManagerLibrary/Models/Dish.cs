@@ -30,12 +30,7 @@ namespace MenuManagerLibrary
         }
 
 
-        /// <summary>
-        /// Constructor for the dish
-        /// </summary>
-        /// <param name="name"></param>
-        /// <param name="description"></param>
-        /// <param name="price"></param>
+        // Constructor for the Dish
         public Dish(string name, string description, double price)
         {
             this.Name = name;
@@ -43,31 +38,13 @@ namespace MenuManagerLibrary
             this.Price = price;
         }
 
+
+        // Overrides
         
         public override string ToString()
         {
             return ($"{this.Name} - {this.Price}€\n{this.Description}\n");
         }
-
-       
-        //public string GetDishInfo()
-        //{
-        //    return ($"{this.Name} - {this.Price}€\n{this.Description}\n");
-        //}
-
-        //public static Dish CreateNewDish()
-        //{
-            
-        //    Console.WriteLine("Name of the dish: ");
-        //    string dishName = Console.ReadLine();
-        //    Console.WriteLine("Description of the dish: ");
-        //    string dishDescription = Console.ReadLine();
-        //    Console.WriteLine("Price of the dish: ");
-        //    double dishPrice = Convert.ToDouble(Console.ReadLine());
-        //    Dish dish = new Dish(dishName, dishDescription, dishPrice);
-        //    return dish;
-
-        //}
 
         public override bool Equals(object obj)
         {

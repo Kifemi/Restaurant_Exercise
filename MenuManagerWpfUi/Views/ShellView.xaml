@@ -15,18 +15,28 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="20"/>
-            <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
 
         <!--Row 1-->
-        <Button x:Name="ShowMenus" Grid.Row="1" Grid.Column="1">
-            Show Menus
-        </Button>
-                
+        <ListBox Grid.Row="1" Grid.Column="1"
+                 Grid.RowSpan="1" MinWidth="100" ItemsSource="{Binding menus}" 
+                 SelectedItem="{Binding Path=SelectedMenu, Mode=OneWayToSource}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Name}" />
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
         <!--Row 2-->
-        <ContentControl Grid.Row="2" Grid.Column="2"
+        <Button x:Name="ShowDishes" Grid.Row="2" Grid.Column="1" Margin="10">
+            Show Foods
+        </Button>
+
+        <ContentControl Grid.Row="1" Grid.Column="2" Grid.RowSpan="2"
                         x:Name="ActiveItem" />
     </Grid>
 </Window>

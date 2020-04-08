@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Caliburn.Micro;
 using MenuManagerLibrary;
-using MenuManagerWpfUi.ViewModels;
+using MenuManagerWpfUi.Views;
 
 namespace MenuManagerWpfUi.ViewModels
 {
@@ -13,6 +13,11 @@ namespace MenuManagerWpfUi.ViewModels
         private Menu _selectedMenu;
         private MenuManager _selecterMenuManager;
         public BindableCollection<Dish> Dishes { get; set; }
+
+        public string DishName { get; set; }
+        public string DishDescription { get; set; }
+        public double DishPrice { get; set; }
+        
 
         public Dish SelectedDish
         {
@@ -57,15 +62,32 @@ namespace MenuManagerWpfUi.ViewModels
 
         public DishViewModel(MenuManager menuManager, Menu menu)
         {
+            //SelectedMenuManager = menuManager;
+            Dishes = new BindableCollection<Dish>(menu.MenuDishList);
             SelectedMenuManager = menuManager;
-            Dishes = new BindableCollection<Dish>(menu.MenuDishList);         
         }       
 
 
 
         // Methods
 
-        
+        public Dish CreateNewDish(string name, string description, double price)
+        {
+            Dish dish = new Dish(name, description, price);
+            return dish;
+        }
+
+        public void AddDishButton()
+        {
+            Dish newDish = this.CreateNewDish(this.DishName, this.DishDescription, this.DishPrice);
+            DataHandler.AddDish(this.SelectedMenuManager, this.SelectedMenu, newDish);
+            
+        }
+
+        public void RemoveDishButton()
+        {
+            SelectedMenuManager.Dishes.Remove(SelectedDish);
+        }
 
     }
 }
