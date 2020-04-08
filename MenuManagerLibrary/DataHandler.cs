@@ -29,7 +29,7 @@ namespace MenuManagerLibrary
                     menuManager.Dishes.Add(dish);
                 }
             }
-            
+
         }
 
         public static void FillDishesWithDemoData(MenuManager menuManager)

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Windows;
 using Caliburn.Micro;
 using MenuManagerLibrary;
 using MenuManagerWpfUi.Views;
@@ -53,18 +54,14 @@ namespace MenuManagerWpfUi.ViewModels
 
 
 
-        // Constructors for DishViewModel      
-
-        //public DishViewModel(MenuManager menuManager)
-        //{
-        //    Dishes = new BindableCollection<Dish>(menuManager.Dishes);
-        //}
+        // Constructor for DishViewModel
 
         public DishViewModel(MenuManager menuManager, Menu menu)
         {
             //SelectedMenuManager = menuManager;
             Dishes = new BindableCollection<Dish>(menu.MenuDishList);
             SelectedMenuManager = menuManager;
+            NotifyOfPropertyChange(() => this.Dishes);
         }       
 
 
@@ -79,14 +76,38 @@ namespace MenuManagerWpfUi.ViewModels
 
         public void AddDishButton()
         {
-            Dish newDish = this.CreateNewDish(this.DishName, this.DishDescription, this.DishPrice);
-            DataHandler.AddDish(this.SelectedMenuManager, this.SelectedMenu, newDish);
+            if (String.IsNullOrWhiteSpace(this.DishName))
+            {
+                MessageBox.Show("Invalid name");
+            }
+            else
+            {
+                Dish newDish = this.CreateNewDish(this.DishName, this.DishDescription, this.DishPrice);
+                this.Dishes.Add(newDish);
+                SelectedMenuManager.allMenus[0].MenuDishList = new List<Dish>(this.Dishes);
+                NotifyOfPropertyChange(() => Dishes);
+            }
             
+
+        }
+
+        public bool CanRemoveDishButton()
+        {
+            if(this.Dishes.Count > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public void RemoveDishButton()
         {
-            SelectedMenuManager.Dishes.Remove(SelectedDish);
+            this.Dishes.Remove(SelectedDish);
+            SelectedMenuManager.allMenus[0].MenuDishList = new List<Dish>(this.Dishes);
+            NotifyOfPropertyChange(() => Dishes);
         }
 
     }
