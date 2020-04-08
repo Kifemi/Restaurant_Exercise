@@ -8,9 +8,9 @@ namespace MenuManagerLibrary
 {
     public class DataHandler
     {
-        public static void SynchronizeLists(List<Dish> dishes, BindableCollection<Dish> dishesBindalbe)
+        public static List<Dish> SynchronizeLists(BindableCollection<Dish> dishesBindable)
         {
-            dishes = new List<Dish>(dishesBindalbe);
+            return new List<Dish>(dishesBindable);
         }
 
         public static Dish CreateNewDish(string name, string description, double price)
