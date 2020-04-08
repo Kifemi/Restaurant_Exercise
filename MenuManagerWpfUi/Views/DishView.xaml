@@ -24,7 +24,7 @@
 
         <!--Row 1-->
 
-        <DataGrid Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3"
+        <DataGrid Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" 
                   ItemsSource="{Binding Dishes}" CanUserAddRows="False" 
                   Margin="10" AutoGenerateColumns="False">
             <DataGrid.Columns>

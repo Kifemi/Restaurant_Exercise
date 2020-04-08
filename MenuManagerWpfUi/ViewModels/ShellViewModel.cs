@@ -9,7 +9,6 @@ namespace MenuManagerWpfUi.ViewModels
     public class ShellViewModel : Conductor<object>
     {
         private MenuManager menuManager;
-        
 
 
 

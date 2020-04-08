@@ -50,10 +50,10 @@ namespace MenuManagerWpfUi.ViewModels
 
         // Constructors for DishViewModel      
 
-        public DishViewModel(MenuManager menuManager)
-        {
-            Dishes = new BindableCollection<Dish>(menuManager.Dishes);
-        }
+        //public DishViewModel(MenuManager menuManager)
+        //{
+        //    Dishes = new BindableCollection<Dish>(menuManager.Dishes);
+        //}
 
         public DishViewModel(MenuManager menuManager, Menu menu)
         {

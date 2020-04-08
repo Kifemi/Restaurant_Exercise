@@ -27,7 +27,7 @@ namespace MenuManagerWpfUi.ViewModels
         {
             get { return _selectedMenu; }        
             set
-            {
+            {              
                 _selectedMenu = value;
                 NotifyOfPropertyChange(() => SelectedMenu);
             } 
@@ -41,7 +41,8 @@ namespace MenuManagerWpfUi.ViewModels
         public MenuViewModel(MenuManager menuManager)
         {
             menus = new BindableCollection<Menu>(menuManager.allMenus);
-            SelectedMenuManager = menuManager;
+            this.SelectedMenuManager = menuManager;
+            this.SelectedMenu = menuManager.allMenus[0];
         }
 
 
@@ -49,22 +50,9 @@ namespace MenuManagerWpfUi.ViewModels
 
         // Methods
 
-        //public bool CanShowDishes()
-        //{
-        //    if (menus[0].MenuDishList.Count == 0)
-        //    {
-        //        return false;
-        //    }
-        //    else
-        //    {
-        //        return true;
-        //    }
-
-        //}
-
         public void ShowDishes()
         {
-            ActivateItemAsync(new DishViewModel(SelectedMenuManager, this.SelectedMenu), System.Threading.CancellationToken.None);
+            ActivateItemAsync(new DishViewModel(this.SelectedMenuManager, this.SelectedMenu), System.Threading.CancellationToken.None);
         }
     }
 }
