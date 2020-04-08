@@ -46,7 +46,6 @@ namespace MenuManagerWpfUi.ViewModels
             set
             {
                 _selecterMenuManager = value;
-                NotifyOfPropertyChange(() => SelectedMenuManager);
             }
         }
 
@@ -58,21 +57,13 @@ namespace MenuManagerWpfUi.ViewModels
 
         public DishViewModel(MenuManager menuManager, Menu menu)
         {
-            //SelectedMenuManager = menuManager;
-            Dishes = new BindableCollection<Dish>(menu.MenuDishList);
             SelectedMenuManager = menuManager;
-            NotifyOfPropertyChange(() => this.Dishes);
+            Dishes = new BindableCollection<Dish>(menu.MenuDishList);
         }       
 
 
 
         // Methods
-
-        public Dish CreateNewDish(string name, string description, double price)
-        {
-            Dish dish = new Dish(name, description, price);
-            return dish;
-        }
 
         public void AddDishButton()
         {
@@ -82,10 +73,8 @@ namespace MenuManagerWpfUi.ViewModels
             }
             else
             {
-                Dish newDish = this.CreateNewDish(this.DishName, this.DishDescription, this.DishPrice);
-                this.Dishes.Add(newDish);
-                SelectedMenuManager.allMenus[0].MenuDishList = new List<Dish>(this.Dishes);
-                NotifyOfPropertyChange(() => Dishes);
+                this.Dishes.Add(DataHandler.CreateNewDish(this.DishName, this.DishDescription, this.DishPrice));
+                DataHandler.SynchronizeLists(SelectedMenuManager.allMenus[0].MenuDishList, this.Dishes);
             }
             
 
@@ -93,7 +82,7 @@ namespace MenuManagerWpfUi.ViewModels
 
         public bool CanRemoveDishButton()
         {
-            if(this.Dishes.Count > 0)
+            if(this.Dishes.Count > 1)
             {
                 return true;
             }
@@ -106,8 +95,7 @@ namespace MenuManagerWpfUi.ViewModels
         public void RemoveDishButton()
         {
             this.Dishes.Remove(SelectedDish);
-            SelectedMenuManager.allMenus[0].MenuDishList = new List<Dish>(this.Dishes);
-            NotifyOfPropertyChange(() => Dishes);
+            DataHandler.SynchronizeLists(SelectedMenuManager.allMenus[0].MenuDishList, this.Dishes);
         }
 
     }

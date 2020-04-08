@@ -2,11 +2,23 @@
 using System.Collections.Generic;
 using System.Text;
 using MenuManagerLibrary;
+using Caliburn.Micro;
 
 namespace MenuManagerLibrary
 {
     public class DataHandler
     {
+        public static void SynchronizeLists(List<Dish> dishes, BindableCollection<Dish> dishesBindalbe)
+        {
+            dishes = new List<Dish>(dishesBindalbe);
+        }
+
+        public static Dish CreateNewDish(string name, string description, double price)
+        {
+            Dish dish = new Dish(name, description, price);
+            return dish;
+        }
+
         public static void AddDish(MenuManager menuManager, Menu menu, Dish dish)
         {
             if (menu == null)
