@@ -9,7 +9,7 @@ namespace MenuManagerLibrary
     public class Menu
     {
         private string _name;
-        private string _description;
+        //private string _description;
         private List<Category> _categories;
         private List<Dish> _menuDishList;
 
@@ -19,11 +19,11 @@ namespace MenuManagerLibrary
             set { _name = value; }
         }
 
-        public string Description
-        {
-            get { return _description; }
-            set { _description = value; }
-        }
+        //public string Description
+        //{
+        //    get { return _description; }
+        //    set { _description = value; }
+        //}
 
         public List<Category> Categories
         {

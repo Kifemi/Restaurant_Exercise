@@ -28,7 +28,7 @@
         <!--Row 1-->
 
         <DataGrid Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" 
-                  ItemsSource="{Binding Dishes}" CanUserAddRows="False" 
+                  ItemsSource="{Binding DishesBinded}" CanUserAddRows="False" 
                   Margin="10" AutoGenerateColumns="False"
                   SelectedItem="{Binding Path=SelectedDish, Mode=OneWayToSource}">
             <DataGrid.Columns>

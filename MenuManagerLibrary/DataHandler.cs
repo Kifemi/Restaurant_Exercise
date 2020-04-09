@@ -8,7 +8,35 @@ namespace MenuManagerLibrary
 {
     public class DataHandler
     {
-        public static List<Dish> SynchronizeLists(BindableCollection<Dish> dishesBindable)
+        public static string TrimString(string word)
+        {
+            string trimmedWord = word.Trim();
+            trimmedWord = FirstLetterToUpperCase(trimmedWord);
+            return trimmedWord;
+        }
+        public static string FirstLetterToUpperCase(string word)
+        {
+            if(word == null)
+            {
+                return null;
+            }
+
+            if(word.Length > 1)
+            {
+                return (char.ToUpper(word[0]) + word.Substring(1));
+            }
+
+            return word.ToUpper();
+        }
+
+        public static bool IsDouble(string input)
+        {
+            double output;
+            bool isDouble = Double.TryParse(input, out output);
+            return isDouble;
+        }
+
+        public static List<Dish> BindableListToNormalList(BindableCollection<Dish> dishesBindable)
         {
             return new List<Dish>(dishesBindable);
         }
@@ -19,29 +47,28 @@ namespace MenuManagerLibrary
             return dish;
         }
 
+        public static void UpdateAllDishes(MenuManager menuManager, BindableCollection<Dish> dishesBinded)
+        {
+            menuManager.AllDishes.Clear();
+            menuManager.AllDishes.AddRange(BindableListToNormalList(dishesBinded));
+            menuManager.allMenus[0].MenuDishList.Clear();
+            menuManager.allMenus[0].MenuDishList.AddRange(BindableListToNormalList(dishesBinded));
+        }
+
+
+
         public static void AddDish(MenuManager menuManager, Menu menu, Dish dish)
         {
-            if (menu == null)
+            if (!menu.MenuDishList.Contains(dish))
             {
-                if (!menuManager.Dishes.Contains(dish))
-                {
-                    menuManager.Dishes.Add(dish);
-                }
-            }
-            else
-            {
-                if (!menu.MenuDishList.Contains(dish))
-                {
-                    menu.MenuDishList.Add(dish);
-                }
-
-
-                if (!menuManager.Dishes.Contains(dish))
-                {
-                    menuManager.Dishes.Add(dish);
-                }
+                menu.MenuDishList.Add(dish);
             }
 
+
+            if (!menuManager.AllDishes.Contains(dish))
+            {
+                menuManager.AllDishes.Add(dish);
+            }
         }
 
         public static void FillDishesWithDemoData(MenuManager menuManager)

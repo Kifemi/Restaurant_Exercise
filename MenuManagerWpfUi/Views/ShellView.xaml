@@ -22,7 +22,7 @@
 
         <!--Row 1-->
         <ListBox Grid.Row="1" Grid.Column="1"
-                 Grid.RowSpan="1" MinWidth="100" ItemsSource="{Binding menus}" 
+                 Grid.RowSpan="1" MinWidth="100" ItemsSource="{Binding MenusBinded}" 
                  SelectedItem="{Binding Path=SelectedMenu, Mode=OneWayToSource}">
             <ListBox.ItemTemplate>
                 <DataTemplate>

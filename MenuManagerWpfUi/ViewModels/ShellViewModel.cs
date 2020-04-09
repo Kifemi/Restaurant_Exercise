@@ -8,9 +8,21 @@ namespace MenuManagerWpfUi.ViewModels
 {
     public class ShellViewModel : Conductor<object>
     {
-        private MenuManager menuManager;
+        private MenuManager _menuManager;
         private Menu _selectedMenu;
-        public BindableCollection<Menu> menus { get; set; }
+        private BindableCollection<Menu> _menusBinded;
+
+        public BindableCollection<Menu> MenusBinded
+        {
+            get { return _menusBinded; }
+            set { _menusBinded = value; }
+        }
+
+        public MenuManager menuManager
+        {
+            get { return _menuManager; }
+            set { _menuManager = value; }
+        }
 
         public Menu SelectedMenu
         {
@@ -22,24 +34,20 @@ namespace MenuManagerWpfUi.ViewModels
         }
 
         // Constructor for ShellViewModel
-
         public ShellViewModel()
         {
-            this.menuManager = new MenuManager();
-            DataHandler.FillDishesWithDemoData(this.menuManager);
-            menus = new BindableCollection<Menu>(this.menuManager.allMenus);
+            menuManager = new MenuManager();
+            DataHandler.FillDishesWithDemoData(menuManager);
+            MenusBinded = new BindableCollection<Menu>(menuManager.allMenus);
 
         }
-
-
-
 
 
         // Methods
 
         public void ShowDishes()
         {
-            ActivateItemAsync(new DishViewModel(this.menuManager, this.SelectedMenu), System.Threading.CancellationToken.None);
+            ActivateItemAsync(new DishViewModel(menuManager, SelectedMenu), System.Threading.CancellationToken.None);
         }
 
 

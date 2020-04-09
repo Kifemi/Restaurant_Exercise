@@ -7,16 +7,16 @@ namespace MenuManagerLibrary
 {
     public class MenuManager
     {
-		private List<Dish> _dishes;
+		private List<Dish> _allDishes;
 		public List<Category> allCategories;
 		public List<Menu> allMenus;
 
-		public List<Dish> Dishes
+		public List<Dish> AllDishes
 		{
-			get { return _dishes; }
+			get { return _allDishes; }
 			set
 			{
-				_dishes = value;
+				_allDishes = value;
 			}
 		}
 
@@ -26,9 +26,9 @@ namespace MenuManagerLibrary
 
 		public MenuManager()
 		{
-			this.Dishes = new List<Dish>();
+			AllDishes = new List<Dish>();
 			this.allMenus = new List<Menu>();
-			this.allMenus.Insert(0, new Menu("All Foods", this.Dishes));
+			this.allMenus.Insert(0, new Menu("All Foods", AllDishes));
 		}
 	}
 }

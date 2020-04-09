@@ -13,20 +13,29 @@ namespace MenuManagerWpfUi.ViewModels
         private Dish _selectedDish;
         private Menu _selectedMenu;
         private MenuManager _selecterMenuManager;
-        private BindableCollection<Dish> _dishes;
-        public string DishName { get; set; }
-        public string DishDescription { get; set; }
+        private BindableCollection<Dish> _dishesBinded;
+        private string _dishName;
         public double DishPrice { get; set; }
+        public string DishDescription { get; set; }
 
-        public BindableCollection<Dish> Dishes
+        public string DishName
+        {
+            get { return _dishName; }
+            set
+            {
+                _dishName = value;
+            }
+        }
+
+        public BindableCollection<Dish> DishesBinded
         {
             get 
             {
-                return _dishes; 
+                return _dishesBinded; 
             }
             set
             {
-                _dishes = value;
+                _dishesBinded = value;
             }
         }
 
@@ -62,11 +71,11 @@ namespace MenuManagerWpfUi.ViewModels
 
 
         // Constructor for DishViewModel
-
         public DishViewModel(MenuManager menuManager, Menu menu)
         {
             SelectedMenuManager = menuManager;
-            this.Dishes = new BindableCollection<Dish>(menu.MenuDishList);
+            SelectedMenu = menu;
+            DishesBinded = new BindableCollection<Dish>(SelectedMenu.MenuDishList);
         }       
 
 
@@ -75,14 +84,21 @@ namespace MenuManagerWpfUi.ViewModels
 
         public void AddDishButton()
         {
-            if (String.IsNullOrWhiteSpace(this.DishName))
+            if (String.IsNullOrWhiteSpace(DishName))
             {
                 MessageBox.Show("Invalid name");
+                return;
+            }
+
+            Dish newDish = DataHandler.CreateNewDish(DataHandler.TrimString(DishName), DishDescription, DishPrice);
+            if (SelectedMenuManager.AllDishes.Contains(newDish))
+            {
+                MessageBox.Show("The dish is already in the list");
             }
             else
             {
-                this.Dishes.Add(DataHandler.CreateNewDish(this.DishName, this.DishDescription, this.DishPrice));
-                SelectedMenuManager.allMenus[0].MenuDishList = DataHandler.SynchronizeLists(this.Dishes);
+                this.DishesBinded.Add(newDish);
+                DataHandler.UpdateAllDishes(SelectedMenuManager, DishesBinded);
             }
             
 
@@ -90,7 +106,7 @@ namespace MenuManagerWpfUi.ViewModels
 
         public bool CanRemoveDishButton()
         {
-            if(this.Dishes.Count > 1)
+            if(this.DishesBinded.Count > 0)
             {
                 return true;
             }
@@ -102,8 +118,9 @@ namespace MenuManagerWpfUi.ViewModels
 
         public void RemoveDishButton()
         {
-            this.Dishes.Remove(SelectedDish);
-            SelectedMenuManager.allMenus[0].MenuDishList = DataHandler.SynchronizeLists(this.Dishes);
+            SelectedMenu.MenuDishList.Remove(SelectedDish);
+            DishesBinded.Remove(SelectedDish);
+            DataHandler.UpdateAllDishes(SelectedMenuManager, DishesBinded);
         }
 
     }
