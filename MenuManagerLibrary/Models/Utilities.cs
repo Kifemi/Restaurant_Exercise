@@ -32,33 +32,17 @@ namespace MenuManagerLibrary
             return new string(letters);
         }
 
-        public static string TrimInput()
+        public static string TrimLowerCaseString(string str)
         {
-            string inputTrimmed = ToLowerCase(TrimString(Console.ReadLine()));
+            string inputTrimmed = ToLowerCase(TrimString(str));
             return inputTrimmed;
         }
 
-        //public void PrintHelp()
-        //{
-        //    Console.WriteLine("Commands: \n" +
-        //        "\t add\n" +
-        //        "\t print\n" +
-        //        "\t help\n" +
-        //        "\t exit");
-
-        //    string input = TrimInput();
-
-        //    if (input.Equals("add"))
-        //    {
-        //        Console.WriteLine("Add options: \n" +
-        //        "\t menu --- creates new menu\n" +
-        //        "\t category --- adds new category to a menu\n" +
-        //        "\t dish --- adds new dish to a menu or a category\n" +
-        //        "\t back --- return to previous menu");
-        //    }
-
-               
-        //}     
-
+        public static bool IsDouble(string input)
+        {
+            double output;
+            bool isDouble = Double.TryParse(input, out output);
+            return isDouble;
+        }
     }
 }

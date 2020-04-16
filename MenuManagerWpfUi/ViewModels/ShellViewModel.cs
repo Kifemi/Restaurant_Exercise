@@ -38,6 +38,10 @@ namespace MenuManagerWpfUi.ViewModels
         {
             menuManager = new MenuManager();
             DataHandler.FillDishesWithDemoData(menuManager);
+            DataHandler.CreatePresetAllergens(menuManager);
+            DataHandler.UpdateAllergensAllDishes(menuManager);
+            //menuManager.AllDishes[0].Allergens[menuManager.allAllergens[0]] = true;
+            menuManager.AllDishes[0].HasLactose.Add(true);
             MenusBinded = new BindableCollection<Menu>(menuManager.allMenus);
 
         }

@@ -4,6 +4,7 @@ using System.Text;
 using System.Windows;
 using Caliburn.Micro;
 using MenuManagerLibrary;
+using MenuManagerLibrary.Models;
 using MenuManagerWpfUi.Views;
 
 namespace MenuManagerWpfUi.ViewModels
@@ -13,7 +14,12 @@ namespace MenuManagerWpfUi.ViewModels
         private Dish _selectedDish;
         private Menu _selectedMenu;
         private MenuManager _selecterMenuManager;
+        private Allergen _selectedAllergen;
         private BindableCollection<Dish> _dishesBinded;
+        //private BindableCollection<Allergen> _allergensBinded;
+
+        
+
         private string _dishName;
         public double DishPrice { get; set; }
         public string DishDescription { get; set; }
@@ -38,6 +44,12 @@ namespace MenuManagerWpfUi.ViewModels
                 _dishesBinded = value;
             }
         }
+
+        //public BindableCollection<Allergen> AllergensBinded
+        //{
+        //    get { return _allergensBinded; }
+        //    set { _allergensBinded = value; }
+        //}
 
         public Dish SelectedDish
         {
@@ -66,7 +78,14 @@ namespace MenuManagerWpfUi.ViewModels
             }
         }
 
-        
+        public Allergen SelectedAllergen
+        {
+            get { return _selectedAllergen; }
+            set 
+            { 
+                _selectedAllergen = value;
+            }
+        }
 
 
 
@@ -76,6 +95,7 @@ namespace MenuManagerWpfUi.ViewModels
             SelectedMenuManager = menuManager;
             SelectedMenu = menu;
             DishesBinded = new BindableCollection<Dish>(SelectedMenu.MenuDishList);
+            //AllergensBinded = new BindableCollection<Allergen>(menuManager.allAllergens);
         }       
 
 
@@ -90,7 +110,9 @@ namespace MenuManagerWpfUi.ViewModels
                 return;
             }
 
-            Dish newDish = DataHandler.CreateNewDish(DataHandler.TrimString(DishName), DishDescription, DishPrice);
+            DishName = Utilities.UpperCaseFirstLetter(Utilities.TrimLowerCaseString(DishName));
+
+            Dish newDish = DataHandler.CreateNewDish(DishName, DishDescription, DishPrice);
             if (SelectedMenuManager.AllDishes.Contains(newDish))
             {
                 MessageBox.Show("The dish is already in the list");

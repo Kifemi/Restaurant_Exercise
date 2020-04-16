@@ -17,6 +17,7 @@
             <RowDefinition Height="20"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
 
@@ -38,5 +39,12 @@
 
         <ContentControl Grid.Row="1" Grid.Column="2" Grid.RowSpan="2"
                         x:Name="ActiveItem" />
+        
+        <!--Row 3-->
+        <Button x:Name="AddAllergen" Grid.Row="3" Grid.Column="1" Margin="10"> 
+            Add Allergen
+        </Button>
+        
+        
     </Grid>
 </Window>

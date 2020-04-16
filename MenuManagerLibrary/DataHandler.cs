@@ -3,39 +3,12 @@ using System.Collections.Generic;
 using System.Text;
 using MenuManagerLibrary;
 using Caliburn.Micro;
+using MenuManagerLibrary.Models;
 
 namespace MenuManagerLibrary
 {
     public class DataHandler
     {
-        public static string TrimString(string word)
-        {
-            string trimmedWord = word.Trim();
-            trimmedWord = FirstLetterToUpperCase(trimmedWord);
-            return trimmedWord;
-        }
-        public static string FirstLetterToUpperCase(string word)
-        {
-            if(word == null)
-            {
-                return null;
-            }
-
-            if(word.Length > 1)
-            {
-                return (char.ToUpper(word[0]) + word.Substring(1));
-            }
-
-            return word.ToUpper();
-        }
-
-        public static bool IsDouble(string input)
-        {
-            double output;
-            bool isDouble = Double.TryParse(input, out output);
-            return isDouble;
-        }
-
         public static List<Dish> BindableListToNormalList(BindableCollection<Dish> dishesBindable)
         {
             return new List<Dish>(dishesBindable);
@@ -55,8 +28,6 @@ namespace MenuManagerLibrary
             menuManager.allMenus[0].MenuDishList.AddRange(BindableListToNormalList(dishesBinded));
         }
 
-
-
         public static void AddDish(MenuManager menuManager, Menu menu, Dish dish)
         {
             if (!menu.MenuDishList.Contains(dish))
@@ -71,6 +42,27 @@ namespace MenuManagerLibrary
             }
         }
 
+        public static void UpdateDishAllergens(MenuManager menuManager, Dish dish)
+        {
+            foreach (Allergen allergen in menuManager.allAllergens)
+            {
+                if (dish.Allergens.ContainsKey(allergen))
+                {
+                    continue;
+                }
+
+                dish.Allergens.Add(allergen, false);
+            }
+        }
+
+        public static void UpdateAllergensAllDishes(MenuManager menuManager)
+        {
+            foreach (Dish dish in menuManager.AllDishes)
+            {
+                UpdateDishAllergens(menuManager, dish);
+            }
+        }
+
         public static void FillDishesWithDemoData(MenuManager menuManager)
         {
 
@@ -82,6 +74,13 @@ namespace MenuManagerLibrary
             AddDish(menuManager, menuManager.allMenus[1], new Dish("Sushi", "I dare you", 9.50));
             AddDish(menuManager, menuManager.allMenus[1], new Dish("Nakit ja muusi", "I dare you", 8.0));
             AddDish(menuManager, menuManager.allMenus[2], new Dish("Vodka", "I dare you", 6.7));
+        }
+
+        public static void CreatePresetAllergens(MenuManager menuManager)
+        {
+            menuManager.allAllergens.Add(new Allergen("Lactose"));
+            menuManager.allAllergens.Add(new Allergen("Fish"));
+            menuManager.allAllergens.Add(new Allergen("Nuts"));
         }
 
         

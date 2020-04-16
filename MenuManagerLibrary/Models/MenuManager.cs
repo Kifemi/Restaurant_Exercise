@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Caliburn.Micro;
+using MenuManagerLibrary.Models;
 
 namespace MenuManagerLibrary
 {
@@ -10,6 +11,7 @@ namespace MenuManagerLibrary
 		private List<Dish> _allDishes;
 		public List<Category> allCategories;
 		public List<Menu> allMenus;
+		public List<Allergen> allAllergens { get; set; }
 
 		public List<Dish> AllDishes
 		{
@@ -27,6 +29,7 @@ namespace MenuManagerLibrary
 		public MenuManager()
 		{
 			AllDishes = new List<Dish>();
+			allAllergens = new List<Allergen>();
 			this.allMenus = new List<Menu>();
 			this.allMenus.Insert(0, new Menu("All Foods", AllDishes));
 		}
