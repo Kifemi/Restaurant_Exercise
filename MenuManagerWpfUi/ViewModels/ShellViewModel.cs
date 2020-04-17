@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Caliburn.Micro;
 using MenuManagerLibrary;
+using System.Linq;
 
 namespace MenuManagerWpfUi.ViewModels
 {
@@ -40,8 +41,7 @@ namespace MenuManagerWpfUi.ViewModels
             DataHandler.FillDishesWithDemoData(menuManager);
             DataHandler.CreatePresetAllergens(menuManager);
             DataHandler.UpdateAllergensAllDishes(menuManager);
-            //menuManager.AllDishes[0].Allergens[menuManager.allAllergens[0]] = true;
-            menuManager.AllDishes[0].HasLactose.Add(true);
+            menuManager.AllDishes[0].Allergens[menuManager.allAllergens[0]] = true;
             MenusBinded = new BindableCollection<Menu>(menuManager.allMenus);
 
         }
@@ -51,7 +51,8 @@ namespace MenuManagerWpfUi.ViewModels
 
         public void ShowDishes()
         {
-            ActivateItemAsync(new DishViewModel(menuManager, SelectedMenu), System.Threading.CancellationToken.None);
+            DishViewModel dishViewModel = new DishViewModel(menuManager, SelectedMenu);
+            ActivateItemAsync(dishViewModel, System.Threading.CancellationToken.None);
         }
 
 

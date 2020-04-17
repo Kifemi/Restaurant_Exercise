@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Caliburn.Micro;
 using MenuManagerLibrary.Models;
+using System.Linq;
 
 namespace MenuManagerLibrary
 {
@@ -11,8 +12,14 @@ namespace MenuManagerLibrary
         private string _name;
         private string _description;
         private double _price;
-        public List<bool> HasLactose{ get; set; }
-        public Dictionary<Allergen, bool> Allergens { get; set; }
+        private Dictionary<Allergen, bool> _allergens;
+
+        public Dictionary<Allergen, bool> Allergens
+        {
+            get { return _allergens; }
+            set { _allergens = value; }
+        }
+
 
         public string Name
         {
@@ -40,7 +47,6 @@ namespace MenuManagerLibrary
             this.Description = description;
             this.Price = price;
             this.Allergens = new Dictionary<Allergen, bool>();
-            this.HasLactose = new List<bool>();
         }
 
 

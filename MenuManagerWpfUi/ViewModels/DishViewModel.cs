@@ -6,6 +6,7 @@ using Caliburn.Micro;
 using MenuManagerLibrary;
 using MenuManagerLibrary.Models;
 using MenuManagerWpfUi.Views;
+using System.Linq;
 
 namespace MenuManagerWpfUi.ViewModels
 {
@@ -16,9 +17,8 @@ namespace MenuManagerWpfUi.ViewModels
         private MenuManager _selecterMenuManager;
         private Allergen _selectedAllergen;
         private BindableCollection<Dish> _dishesBinded;
-        //private BindableCollection<Allergen> _allergensBinded;
 
-        
+
 
         private string _dishName;
         public double DishPrice { get; set; }
@@ -44,12 +44,6 @@ namespace MenuManagerWpfUi.ViewModels
                 _dishesBinded = value;
             }
         }
-
-        //public BindableCollection<Allergen> AllergensBinded
-        //{
-        //    get { return _allergensBinded; }
-        //    set { _allergensBinded = value; }
-        //}
 
         public Dish SelectedDish
         {
@@ -95,12 +89,17 @@ namespace MenuManagerWpfUi.ViewModels
             SelectedMenuManager = menuManager;
             SelectedMenu = menu;
             DishesBinded = new BindableCollection<Dish>(SelectedMenu.MenuDishList);
-            //AllergensBinded = new BindableCollection<Allergen>(menuManager.allAllergens);
         }       
 
 
 
         // Methods
+
+        public void ShowAllergens()
+        {
+            AllergensViewModel allergensViewModel = new AllergensViewModel(SelectedMenuManager, SelectedMenu, SelectedDish);
+            ActivateItemAsync(allergensViewModel, System.Threading.CancellationToken.None);
+        }
 
         public void AddDishButton()
         {
@@ -144,6 +143,5 @@ namespace MenuManagerWpfUi.ViewModels
             DishesBinded.Remove(SelectedDish);
             DataHandler.UpdateAllDishes(SelectedMenuManager, DishesBinded);
         }
-
     }
 }
