@@ -10,7 +10,7 @@ namespace MenuManagerLibrary
     {
 		private List<Dish> _allDishes;
 		public List<Category> allCategories;
-		public List<Menu> allMenus;
+		public List<FoodMenu> allMenus;
 		public List<Allergen> allAllergens { get; set; }
 
 		public List<Dish> AllDishes
@@ -30,8 +30,8 @@ namespace MenuManagerLibrary
 		{
 			AllDishes = new List<Dish>();
 			allAllergens = new List<Allergen>();
-			this.allMenus = new List<Menu>();
-			this.allMenus.Insert(0, new Menu("All Foods", AllDishes));
+			this.allMenus = new List<FoodMenu>();
+			this.allMenus.Insert(0, new FoodMenu("All Foods", AllDishes));
 		}
 	}
 }

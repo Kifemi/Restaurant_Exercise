@@ -12,9 +12,9 @@ namespace MenuManagerLibrary
         private string _name;
         private string _description;
         private double _price;
-        private Dictionary<Allergen, bool> _allergens;
+        private List<Allergen> _allergens;
 
-        public Dictionary<Allergen, bool> Allergens
+        public List<Allergen> Allergens
         {
             get { return _allergens; }
             set { _allergens = value; }
@@ -46,7 +46,7 @@ namespace MenuManagerLibrary
             this.Name = name;
             this.Description = description;
             this.Price = price;
-            this.Allergens = new Dictionary<Allergen, bool>();
+            this.Allergens = new List<Allergen>();
         }
 
 

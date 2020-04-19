@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:MenuManagerWpfUi.Views"
              mc:Ignorable="d" Background="CadetBlue"
              d:DesignHeight="450" d:DesignWidth="800">
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="20"/>
@@ -18,15 +19,12 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="20"/>
         </Grid.ColumnDefinitions>
-        
-        <!--Row 1-->
-        <DataGrid Grid.Row="1" Grid.Column="1" Margin="10" 
-                  ItemsSource="{Binding Path=SelectedDish.Allergens}" CanUserAddRows="False"
-                  AutoGenerateColumns="False">
+
+        <DataGrid Grid.Row="1" Grid.Column="1" AutoGenerateColumns="False" 
+                  ItemsSource="{Binding Path=AllergenBoolCombinations}">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Allergen" Binding="{Binding Path=Key.Name}" />
-                <DataGridCheckBoxColumn Header="Contains" 
-                                        Binding="{Binding Path=Value, Mode=OneWay}"/>
+                <DataGridTextColumn Header="Allergen" Binding="{Binding Path=allergen.Name}"/>
+                <DataGridCheckBoxColumn Header="Contains" Binding="{Binding Path=hasAllergen}"/>
             </DataGrid.Columns>
         </DataGrid>
         

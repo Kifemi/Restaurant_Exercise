@@ -7,15 +7,15 @@ using MenuManagerLibrary;
 using MenuManagerLibrary.Models;
 using MenuManagerWpfUi.Views;
 using System.Linq;
+using System.Windows.Controls;
 
 namespace MenuManagerWpfUi.ViewModels
 {
     public class DishViewModel : Conductor<object>
     {
         private Dish _selectedDish;
-        private Menu _selectedMenu;
+        private FoodMenu _selectedMenu;
         private MenuManager _selecterMenuManager;
-        private Allergen _selectedAllergen;
         private BindableCollection<Dish> _dishesBinded;
 
 
@@ -54,7 +54,7 @@ namespace MenuManagerWpfUi.ViewModels
             }
         }
 
-        public Menu SelectedMenu
+        public FoodMenu SelectedMenu
         {
             get { return _selectedMenu; }
             set
@@ -72,19 +72,10 @@ namespace MenuManagerWpfUi.ViewModels
             }
         }
 
-        public Allergen SelectedAllergen
-        {
-            get { return _selectedAllergen; }
-            set 
-            { 
-                _selectedAllergen = value;
-            }
-        }
-
 
 
         // Constructor for DishViewModel
-        public DishViewModel(MenuManager menuManager, Menu menu)
+        public DishViewModel(MenuManager menuManager, FoodMenu menu)
         {
             SelectedMenuManager = menuManager;
             SelectedMenu = menu;
@@ -97,7 +88,8 @@ namespace MenuManagerWpfUi.ViewModels
 
         public void ShowAllergens()
         {
-            AllergensViewModel allergensViewModel = new AllergensViewModel(SelectedMenuManager, SelectedMenu, SelectedDish);
+            //DataHandler.SynchronizeAllergenLists(this.SelectedDish, this.SelectedMenuManager);
+            AllergensViewModel allergensViewModel = new AllergensViewModel(this.SelectedMenuManager, this.SelectedMenu, this.SelectedDish);
             ActivateItemAsync(allergensViewModel, System.Threading.CancellationToken.None);
         }
 
@@ -143,5 +135,11 @@ namespace MenuManagerWpfUi.ViewModels
             DishesBinded.Remove(SelectedDish);
             DataHandler.UpdateAllDishes(SelectedMenuManager, DishesBinded);
         }
+
+        //public void Selector_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        //{
+        //    AllergensViewModel allergensViewModel = new AllergensViewModel(this.SelectedMenuManager, this.SelectedMenu, this.SelectedDish);
+        //    ActivateItemAsync(allergensViewModel, System.Threading.CancellationToken.None);
+        //}
     }
 }

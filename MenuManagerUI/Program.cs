@@ -9,7 +9,7 @@ namespace MenuManagerUI
         static void Main(string[] args)
         {
             Console.OutputEncoding = System.Text.Encoding.UTF8;
-            Menu menu = new Menu("A la Carte - menu ");
+            FoodMenu menu = new FoodMenu("A la Carte - menu ");
             //menu.SetPresetCategories();
             List<Dish> dishes = new List<Dish>();
             menu.Categories[1].ListOfDishes.Add(new Dish("Haggis", "I dare you", 15));
@@ -20,9 +20,9 @@ namespace MenuManagerUI
 
 
             List<Dish> fullListOfDishes = menu.CombineCategoriesToList();
-            Menu.PrintMenuAlphabeticalOrder(fullListOfDishes);
+            FoodMenu.PrintMenuAlphabeticalOrder(fullListOfDishes);
             Console.WriteLine("================");
-            Menu.PrintMenuPriceOrder(fullListOfDishes);
+            FoodMenu.PrintMenuPriceOrder(fullListOfDishes);
             Console.WriteLine("================");
             menu.PrintMenuCategoryOrder();
         }

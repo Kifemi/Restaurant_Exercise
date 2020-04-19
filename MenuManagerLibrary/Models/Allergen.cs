@@ -19,5 +19,30 @@ namespace MenuManagerLibrary.Models
 			this.Name = name;
 		}
 
-	}
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (!(obj is Allergen))
+            {
+                return false;
+            }
+
+            if (this.Name == ((Allergen)obj).Name)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+
+        }
+    }
+
 }

@@ -6,7 +6,7 @@ using MenuManagerLibrary;
 
 namespace MenuManagerLibrary
 {
-    public class Menu
+    public class FoodMenu
     {
         private string _name;
         //private string _description;
@@ -46,13 +46,13 @@ namespace MenuManagerLibrary
 
         // Constructors for Menu
 
-        public Menu(string name)
+        public FoodMenu(string name)
         {
             this.Name = name;
             this.MenuDishList = new List<Dish>();
         }
 
-        public Menu(string name, List<Dish> menuDishList)
+        public FoodMenu(string name, List<Dish> menuDishList)
         {
             this.Name = name;
             this.MenuDishList = menuDishList;

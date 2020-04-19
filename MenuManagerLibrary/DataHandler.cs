@@ -29,7 +29,7 @@ namespace MenuManagerLibrary
 
         }
 
-        public static void AddDish(MenuManager menuManager, Menu menu, Dish dish)
+        public static void AddDish(MenuManager menuManager, FoodMenu menu, Dish dish)
         {
             if (!menu.MenuDishList.Contains(dish))
             {
@@ -43,17 +43,40 @@ namespace MenuManagerLibrary
             }
         }
 
-        public static void UpdateDishAllergens(MenuManager menuManager, Dish dish)
+        public static List<Allergen> UpdateDishAllergens(MenuManager menuManager, Dish dish)
         {
+            List<Allergen> outputList = new List<Allergen>();
             foreach (Allergen allergen in menuManager.allAllergens)
             {
-                if (dish.Allergens.ContainsKey(allergen))
+                if (dish.Allergens.Contains(allergen))
                 {
-                    continue;
+                    outputList.Add(allergen);
                 }
-
-                dish.Allergens.Add(allergen, false);
+                else
+                {
+                    outputList.Add(null);
+                }
             }
+
+            return outputList;
+        }
+
+        public static List<bool> WhichAllergensDishContains(Dish dish)
+        {
+            List<bool> outputList = new List<bool>();
+            foreach (Allergen allergen in dish.Allergens)
+            {
+                if(allergen == null)
+                {
+                    outputList.Add(false);
+                }
+                else
+                {
+                    outputList.Add(true);
+                }
+            }
+
+            return outputList;
         }
 
         public static void UpdateAllergensAllDishes(MenuManager menuManager)
@@ -84,6 +107,44 @@ namespace MenuManagerLibrary
             menuManager.allAllergens.Add(new Allergen("Nuts"));
         }
 
+        public static List<AllergenBoolCombination> CombineAllergenAndBool(MenuManager menuManager, List<Allergen> allergens)
+        {
+            List<AllergenBoolCombination> outputList = new List<AllergenBoolCombination>();
+
+            foreach (Allergen allergen in menuManager.allAllergens)
+            {
+                AllergenBoolCombination allergenBoolCombination = new AllergenBoolCombination();
+                allergenBoolCombination.allergen = allergen;
+
+                if (allergens.Contains(allergen))
+                {
+                    allergenBoolCombination.hasAllergen = true;
+                }
+                else
+                {
+                    allergenBoolCombination.hasAllergen = false;
+                }
+
+                outputList.Add(allergenBoolCombination);
+            }
+
+            return outputList;
+        }
+
+        //public static void SynchronizeAllergenLists(Dish dish, MenuManager menuManager)
+        //{
+        //    foreach (Allergen allergen in menuManager.allAllergens)
+        //    {
+        //        if (dish.Allergens.ContainsKey(allergen))
+        //        {
+        //            dish.Allergens.Add(allergen, true);
+        //        }
+        //        else
+        //        {
+        //            dish.Allergens.Add(allergen, false);
+        //        }
+        //    }
+        //}
         
     }
 }

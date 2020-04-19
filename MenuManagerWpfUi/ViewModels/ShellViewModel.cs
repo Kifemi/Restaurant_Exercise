@@ -10,10 +10,10 @@ namespace MenuManagerWpfUi.ViewModels
     public class ShellViewModel : Conductor<object>
     {
         private MenuManager _menuManager;
-        private Menu _selectedMenu;
-        private BindableCollection<Menu> _menusBinded;
+        private FoodMenu _selectedMenu;
+        private BindableCollection<FoodMenu> _menusBinded;
 
-        public BindableCollection<Menu> MenusBinded
+        public BindableCollection<FoodMenu> MenusBinded
         {
             get { return _menusBinded; }
             set { _menusBinded = value; }
@@ -25,7 +25,7 @@ namespace MenuManagerWpfUi.ViewModels
             set { _menuManager = value; }
         }
 
-        public Menu SelectedMenu
+        public FoodMenu SelectedMenu
         {
             get { return _selectedMenu; }
             set
@@ -41,8 +41,10 @@ namespace MenuManagerWpfUi.ViewModels
             DataHandler.FillDishesWithDemoData(menuManager);
             DataHandler.CreatePresetAllergens(menuManager);
             DataHandler.UpdateAllergensAllDishes(menuManager);
-            menuManager.AllDishes[0].Allergens[menuManager.allAllergens[0]] = true;
-            MenusBinded = new BindableCollection<Menu>(menuManager.allMenus);
+            MenusBinded = new BindableCollection<FoodMenu>(menuManager.allMenus);
+            menuManager.AllDishes[0].Allergens.Add(menuManager.allAllergens[0]);
+            menuManager.AllDishes[0].Allergens.Add(menuManager.allAllergens[1]);
+            menuManager.AllDishes[0].Allergens.Add(menuManager.allAllergens[2]);
 
         }
 

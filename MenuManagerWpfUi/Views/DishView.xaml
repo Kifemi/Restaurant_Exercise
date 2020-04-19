@@ -32,8 +32,8 @@
                   ItemsSource="{Binding DishesBinded}" CanUserAddRows="False" 
                   Margin="0,10,0,10" AutoGenerateColumns="False"
                   SelectedItem="{Binding Path=SelectedDish, Mode=TwoWay}"
-                  AlternatingRowBackground="WhiteSmoke"
-                  SelectionChanged="Selector_OnSelectionChanced">
+                  AlternatingRowBackground="WhiteSmoke">
+            <!--SelectionChanged="Selector_OnSelectionChanged"-->
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Name" Binding="{Binding Path=Name}" />
                 <DataGridTextColumn Header="Description" Binding="{Binding Path=Description}" />
