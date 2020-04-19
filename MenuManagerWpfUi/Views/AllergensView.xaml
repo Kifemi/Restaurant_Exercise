@@ -11,22 +11,32 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="20"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="113"/>
+            <ColumnDefinition Width="*" />
             <ColumnDefinition Width="20"/>
         </Grid.ColumnDefinitions>
 
-        <DataGrid Grid.Row="1" Grid.Column="1" AutoGenerateColumns="False" 
+        <!--Row 1-->
+        <DataGrid Grid.Row="1" Grid.Column="1" 
+                  AutoGenerateColumns="False" Grid.ColumnSpan="2"
+                  CanUserAddRows="False" AlternatingRowBackground="WhiteSmoke"
                   ItemsSource="{Binding Path=AllergenBoolCombinations}">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Allergen" Binding="{Binding Path=allergen.Name}"/>
-                <DataGridCheckBoxColumn Header="Contains" Binding="{Binding Path=hasAllergen}"/>
+                <DataGridTextColumn Header="Allergen" 
+                                    Binding="{Binding Path=allergen.Name, Mode=OneWay}"/>
+                <DataGridCheckBoxColumn Header="Contains" 
+                                        Binding="{Binding Path=hasAllergen, Mode=TwoWay}" />
             </DataGrid.Columns>
         </DataGrid>
-        
+
+        <Button x:Name="SaveChanges" Grid.Row="2" Grid.Column="1" Margin="10">
+            Save Changes
+        </Button>
     </Grid>
 </UserControl>

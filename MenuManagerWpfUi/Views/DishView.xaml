@@ -33,42 +33,10 @@
                   Margin="0,10,0,10" AutoGenerateColumns="False"
                   SelectedItem="{Binding Path=SelectedDish, Mode=TwoWay}"
                   AlternatingRowBackground="WhiteSmoke">
-            <!--SelectionChanged="Selector_OnSelectionChanged"-->
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Name" Binding="{Binding Path=Name}" />
                 <DataGridTextColumn Header="Description" Binding="{Binding Path=Description}" />
                 <DataGridTextColumn Header="Price" Binding="{Binding Path=Price}" />
-                <!--<DataGridTemplateColumn Header="Allergens" >
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="Allergens"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                    <DataGridTemplateColumn.CellEditingTemplate>
-                        <DataTemplate>
-                            <ComboBox ItemsSource="{Binding RelativeSource=
-                                      {RelativeSource FindAncestor, AncestorType=
-                                      {x:Type DataGrid}}, Path=DataContext.AllergensBinded}"
-                                      SelectedItem="{Binding RelativeSource=
-                                      {RelativeSource FindAncestor, AncestorType=
-                                      {x:Type DataGrid}}, Path=DataContext.SelectedAllergen}">
-                                <ComboBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <StackPanel Orientation="Horizontal">
-                                            <TextBlock Text="{Binding Path=Name}"/>
-                                            <CheckBox IsChecked=
-                                                      "{Binding Path=Allergens[SelectedAllergen]}" />
-                                        </StackPanel>
-                                    </DataTemplate>
-                                </ComboBox.ItemTemplate>
-                            </ComboBox>
-                        </DataTemplate>        
-                    </DataGridTemplateColumn.CellEditingTemplate>-->
-                <!--<DataGridTextColumn Header="Lactose"
-                Binding="{Binding Path=Allergens[0].Key.Name}"/>-->
-
-                <!--<DataGridCheckBoxColumn Header="Lactose" 
-                 Binding="{Binding Path=Allergens[lactose].Value}"/>-->
             </DataGrid.Columns>
 
             

@@ -20,7 +20,6 @@ namespace MenuManagerLibrary
             set { _allergens = value; }
         }
 
-
         public string Name
         {
             get { return _name; }

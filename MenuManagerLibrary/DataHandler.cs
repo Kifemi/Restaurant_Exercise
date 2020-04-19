@@ -43,50 +43,6 @@ namespace MenuManagerLibrary
             }
         }
 
-        public static List<Allergen> UpdateDishAllergens(MenuManager menuManager, Dish dish)
-        {
-            List<Allergen> outputList = new List<Allergen>();
-            foreach (Allergen allergen in menuManager.allAllergens)
-            {
-                if (dish.Allergens.Contains(allergen))
-                {
-                    outputList.Add(allergen);
-                }
-                else
-                {
-                    outputList.Add(null);
-                }
-            }
-
-            return outputList;
-        }
-
-        public static List<bool> WhichAllergensDishContains(Dish dish)
-        {
-            List<bool> outputList = new List<bool>();
-            foreach (Allergen allergen in dish.Allergens)
-            {
-                if(allergen == null)
-                {
-                    outputList.Add(false);
-                }
-                else
-                {
-                    outputList.Add(true);
-                }
-            }
-
-            return outputList;
-        }
-
-        public static void UpdateAllergensAllDishes(MenuManager menuManager)
-        {
-            foreach (Dish dish in menuManager.AllDishes)
-            {
-                UpdateDishAllergens(menuManager, dish);
-            }
-        }
-
         public static void FillDishesWithDemoData(MenuManager menuManager)
         {
 
@@ -131,20 +87,21 @@ namespace MenuManagerLibrary
             return outputList;
         }
 
-        //public static void SynchronizeAllergenLists(Dish dish, MenuManager menuManager)
-        //{
-        //    foreach (Allergen allergen in menuManager.allAllergens)
-        //    {
-        //        if (dish.Allergens.ContainsKey(allergen))
-        //        {
-        //            dish.Allergens.Add(allergen, true);
-        //        }
-        //        else
-        //        {
-        //            dish.Allergens.Add(allergen, false);
-        //        }
-        //    }
-        //}
+        public static void UpdateDishAllergens(List<AllergenBoolCombination> combinationList, Dish dish)
+        {
+            List<Allergen> dishAllergensUpdated = new List<Allergen>();
+
+            foreach (AllergenBoolCombination allergenBool in combinationList)
+            {
+                if (allergenBool.hasAllergen == true)
+                {
+                    dishAllergensUpdated.Add(allergenBool.allergen);
+                }
+            }
+
+            dish.Allergens = dishAllergensUpdated;
+        }
+       
         
     }
 }

@@ -25,7 +25,6 @@ namespace MenuManagerLibrary
 
 
 		// Constructor for MenuManager
-
 		public MenuManager()
 		{
 			AllDishes = new List<Dish>();

@@ -84,11 +84,10 @@ namespace MenuManagerWpfUi.ViewModels
 
 
 
-        // Methods
+        // Buttons
 
         public void ShowAllergens()
         {
-            //DataHandler.SynchronizeAllergenLists(this.SelectedDish, this.SelectedMenuManager);
             AllergensViewModel allergensViewModel = new AllergensViewModel(this.SelectedMenuManager, this.SelectedMenu, this.SelectedDish);
             ActivateItemAsync(allergensViewModel, System.Threading.CancellationToken.None);
         }
@@ -135,11 +134,5 @@ namespace MenuManagerWpfUi.ViewModels
             DishesBinded.Remove(SelectedDish);
             DataHandler.UpdateAllDishes(SelectedMenuManager, DishesBinded);
         }
-
-        //public void Selector_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
-        //{
-        //    AllergensViewModel allergensViewModel = new AllergensViewModel(this.SelectedMenuManager, this.SelectedMenu, this.SelectedDish);
-        //    ActivateItemAsync(allergensViewModel, System.Threading.CancellationToken.None);
-        //}
     }
 }

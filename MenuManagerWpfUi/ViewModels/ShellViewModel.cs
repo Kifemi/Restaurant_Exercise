@@ -40,7 +40,6 @@ namespace MenuManagerWpfUi.ViewModels
             menuManager = new MenuManager();
             DataHandler.FillDishesWithDemoData(menuManager);
             DataHandler.CreatePresetAllergens(menuManager);
-            DataHandler.UpdateAllergensAllDishes(menuManager);
             MenusBinded = new BindableCollection<FoodMenu>(menuManager.allMenus);
             menuManager.AllDishes[0].Allergens.Add(menuManager.allAllergens[0]);
             menuManager.AllDishes[0].Allergens.Add(menuManager.allAllergens[1]);
@@ -49,7 +48,7 @@ namespace MenuManagerWpfUi.ViewModels
         }
 
 
-        // Methods
+        // Buttons
 
         public void ShowDishes()
         {
