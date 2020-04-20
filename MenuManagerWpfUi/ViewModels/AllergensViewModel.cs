@@ -58,5 +58,6 @@ namespace MenuManagerWpfUi.ViewModels
 			DataHandler.UpdateDishAllergens(new List<AllergenBoolCombination>(AllergenBoolCombinations), SelectedDish);
 			MessageBox.Show("Changes saved");
 		}
+
 	}
 }

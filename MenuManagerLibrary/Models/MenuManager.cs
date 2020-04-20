@@ -30,7 +30,7 @@ namespace MenuManagerLibrary
 			AllDishes = new List<Dish>();
 			allAllergens = new List<Allergen>();
 			this.allMenus = new List<FoodMenu>();
-			this.allMenus.Insert(0, new FoodMenu("All Foods", AllDishes));
+			//this.allMenus.Insert(0, new FoodMenu("All Foods", AllDishes));
 		}
 	}
 }

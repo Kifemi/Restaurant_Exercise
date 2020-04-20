@@ -17,6 +17,7 @@ namespace MenuManagerWpfUi.ViewModels
         private FoodMenu _selectedMenu;
         private MenuManager _selecterMenuManager;
         private BindableCollection<Dish> _dishesBinded;
+        public AllergensViewModel allergensViewModel { get; set; }
 
 
 
@@ -51,6 +52,15 @@ namespace MenuManagerWpfUi.ViewModels
             set
             {
                 _selectedDish = value;
+                if(value == null)
+                {
+                    return;
+                }
+                else
+                {
+                    ShowAllergens();
+                }
+                
             }
         }
 
@@ -75,11 +85,11 @@ namespace MenuManagerWpfUi.ViewModels
 
 
         // Constructor for DishViewModel
-        public DishViewModel(MenuManager menuManager, FoodMenu menu)
+        public DishViewModel(MenuManager menuManager)
         {
             SelectedMenuManager = menuManager;
-            SelectedMenu = menu;
-            DishesBinded = new BindableCollection<Dish>(SelectedMenu.MenuDishList);
+            //SelectedMenu = menu;
+            DishesBinded = new BindableCollection<Dish>(menuManager.AllDishes);
         }       
 
 
@@ -88,7 +98,7 @@ namespace MenuManagerWpfUi.ViewModels
 
         public void ShowAllergens()
         {
-            AllergensViewModel allergensViewModel = new AllergensViewModel(this.SelectedMenuManager, this.SelectedMenu, this.SelectedDish);
+            allergensViewModel = new AllergensViewModel(this.SelectedMenuManager, this.SelectedMenu, this.SelectedDish);
             ActivateItemAsync(allergensViewModel, System.Threading.CancellationToken.None);
         }
 
@@ -130,7 +140,8 @@ namespace MenuManagerWpfUi.ViewModels
 
         public void RemoveDishButton()
         {
-            SelectedMenu.MenuDishList.Remove(SelectedDish);
+            
+            SelectedMenuManager.AllDishes.Remove(SelectedDish);
             DishesBinded.Remove(SelectedDish);
             DataHandler.UpdateAllDishes(SelectedMenuManager, DishesBinded);
         }

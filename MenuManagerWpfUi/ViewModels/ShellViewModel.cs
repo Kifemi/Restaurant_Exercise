@@ -50,12 +50,16 @@ namespace MenuManagerWpfUi.ViewModels
 
         // Buttons
 
-        public void ShowDishes()
+        public void ShowMenu()
         {
-            DishViewModel dishViewModel = new DishViewModel(menuManager, SelectedMenu);
-            ActivateItemAsync(dishViewModel, System.Threading.CancellationToken.None);
+            MenuViewModel menuViewModel = new MenuViewModel(menuManager, SelectedMenu);
+            ActivateItemAsync(menuViewModel, System.Threading.CancellationToken.None);
         }
 
-
+        public void ShowDishes()
+        {
+            //DishViewModel dishViewModel = new DishViewModel(menuManager);
+            ActivateItemAsync(new DishViewModel(menuManager), System.Threading.CancellationToken.None);
+        }
     }
 }
