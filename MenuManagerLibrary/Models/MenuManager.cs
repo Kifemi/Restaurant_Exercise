@@ -9,7 +9,7 @@ namespace MenuManagerLibrary
     public class MenuManager
     {
 		private List<Dish> _allDishes;
-		public List<Category> allCategories;
+		//public List<Category> allCategories;
 		public List<FoodMenu> allMenus;
 		public List<Allergen> allAllergens { get; set; }
 

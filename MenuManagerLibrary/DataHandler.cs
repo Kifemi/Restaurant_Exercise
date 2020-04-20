@@ -48,12 +48,18 @@ namespace MenuManagerLibrary
 
             menuManager.allMenus.Add(new FoodMenu("A la Carte"));
             menuManager.allMenus.Add(new FoodMenu("Dinner"));
+            menuManager.allMenus.Add(new FoodMenu("Drinks"));
+            menuManager.allMenus[0].Categories.Add(new Category("Appetizers"));
+            menuManager.allMenus[0].Categories.Add(new Category("Main Courses"));
+            menuManager.allMenus[0].Categories.Add(new Category("Desserts"));
+            menuManager.allMenus[1].Categories.Add(new Category("Main Courses"));
             AddDish(menuManager, menuManager.allMenus[1], new Dish("Haggis", "I dare you", 15));
-            AddDish(menuManager, menuManager.allMenus[1], new Dish("Vodka", "I dare you", 6.7));
+            AddDish(menuManager, menuManager.allMenus[2], new Dish("Vodka", "I dare you", 6.7));
             AddDish(menuManager, menuManager.allMenus[1], new Dish("Maggara", "I dare you", 4.7));
             AddDish(menuManager, menuManager.allMenus[0], new Dish("Sushi", "I dare you", 9.50));
             AddDish(menuManager, menuManager.allMenus[0], new Dish("Nakit ja muusi", "I dare you", 8.0));
             AddDish(menuManager, menuManager.allMenus[0], new Dish("Vodka", "I dare you", 6.7));
+            menuManager.allMenus[0].Categories[0].ListOfDishes.Add(menuManager.AllDishes[0]);
         }
 
         public static void CreatePresetAllergens(MenuManager menuManager)

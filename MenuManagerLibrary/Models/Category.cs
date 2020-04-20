@@ -7,7 +7,6 @@ namespace MenuManagerLibrary
     public class Category
     {
 		private string name;
-		private string _description;
 		private List<Dish> listOfDishes;
 
 		public string Name
@@ -20,12 +19,6 @@ namespace MenuManagerLibrary
 		{
 			get { return listOfDishes; }
 			set { listOfDishes = value; }
-		}
-
-		public string Description
-		{
-			get { return _description; }
-			set { _description = value; }
 		}
 
 		public Category(string name)

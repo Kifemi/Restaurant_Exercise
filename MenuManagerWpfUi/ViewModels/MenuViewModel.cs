@@ -10,9 +10,10 @@ namespace MenuManagerWpfUi.ViewModels
     public class MenuViewModel : Conductor<object>
     {
         private Dish _selectedDish;
+        private Category _selectedCategory;
         private FoodMenu _selectedMenu;
         private MenuManager _selecterMenuManager;
-        private BindableCollection<Category> _categories;
+        private BindableCollection<Category> _categoriesBinded;
         private BindableCollection<Dish> _allDishesBinded;
         private BindableCollection<Dish> _menuDishesBinded;
 
@@ -28,10 +29,10 @@ namespace MenuManagerWpfUi.ViewModels
             set { _menuDishesBinded = value; }
         }
 
-        public BindableCollection<Category> Categories
+        public BindableCollection<Category> CategoriesBinded
         {
-            get { return _categories; }
-            set { _categories = value; }
+            get { return _categoriesBinded; }
+            set { _categoriesBinded = value; }
         }
 
         public Dish SelectedDish
@@ -52,6 +53,19 @@ namespace MenuManagerWpfUi.ViewModels
             set{ _selecterMenuManager = value; }
         }
 
+        public Category SelectedCategory
+        {
+            get { return _selectedCategory; }
+            set 
+            { 
+                //Add if(category is menu.categories[0] then foreach category add dishes to list)
+                _selectedCategory = value;
+                MenuDishesBinded.Clear();
+                MenuDishesBinded = new BindableCollection<Dish>(value.ListOfDishes);
+                NotifyOfPropertyChange(() => MenuDishesBinded);
+            }
+        }
+
 
 
         // Constructor for DishViewModel
@@ -59,11 +73,39 @@ namespace MenuManagerWpfUi.ViewModels
         {
             SelectedMenuManager = menuManager;
             SelectedMenu = menu;
-            AllDishesBinded = new BindableCollection<Dish>(SelectedMenu.MenuDishList);
-            MenuDishesBinded = new BindableCollection<Dish>(SelectedMenuManager.AllDishes);
+            AllDishesBinded = new BindableCollection<Dish>(SelectedMenuManager.AllDishes);
+            MenuDishesBinded = new BindableCollection<Dish>(SelectedMenu.Categories[0].ListOfDishes);
+            CategoriesBinded = new BindableCollection<Category>(SelectedMenu.Categories);
+            SelectedCategory = SelectedMenu.Categories[0];
+        }
+        
+        public void AddDishToCategory()
+        {
+            if (SelectedCategory.ListOfDishes.Contains(SelectedDish))
+            {
+                MessageBox.Show("The dish is already in the list");
+                return;
+            }
+
+            SelectedCategory.ListOfDishes.Add(SelectedDish);
+            MenuDishesBinded.Clear();
+            MenuDishesBinded = new BindableCollection<Dish>(SelectedCategory.ListOfDishes);
+            NotifyOfPropertyChange(() => MenuDishesBinded);
         }
 
+        public void RemoveDishFromCategory()
+        {
+            if (SelectedCategory.ListOfDishes.Contains(SelectedDish))
+            {
+                SelectedCategory.ListOfDishes.Remove(SelectedDish);
+                MenuDishesBinded.Clear();
+                MenuDishesBinded = new BindableCollection<Dish>(SelectedCategory.ListOfDishes);
+                NotifyOfPropertyChange(() => MenuDishesBinded);
+                return;
+            }
 
+            MessageBox.Show("The dish is not in the list");
+        }
 
         // Buttons
 

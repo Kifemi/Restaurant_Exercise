@@ -13,21 +13,21 @@
             <RowDefinition Height="100"/>
             <RowDefinition Height="30"/>
             <RowDefinition Height="30"/>
-            <RowDefinition Height="150"/>
+            <RowDefinition Height="100"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="50" />
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20"/>
-            <ColumnDefinition Width="100"/>
-            <ColumnDefinition Width="30" />
-            <ColumnDefinition Width="70"/>
-            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="80"/>
+            <ColumnDefinition Width="20" />
+            <ColumnDefinition Width="60"/>
+            <ColumnDefinition Width="80"/>
             <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="150" />
+            <ColumnDefinition Width="auto" />
             <ColumnDefinition Width="100" />
-            <ColumnDefinition Width="150" />
+            <ColumnDefinition Width="auto" />
             <ColumnDefinition Width="20"/>
         </Grid.ColumnDefinitions>
 
@@ -36,7 +36,7 @@
                    Background="Beige" FontSize="20" HorizontalAlignment="Center" />
 
 
-        <DataGrid Grid.Row="1" Grid.Column="6" Grid.RowSpan="5" Grid.ColumnSpan="1" 
+        <DataGrid Grid.Row="1" Grid.Column="6" Grid.RowSpan="6" Grid.ColumnSpan="1" 
                   ItemsSource="{Binding AllDishesBinded}" CanUserAddRows="False" 
                   Margin="0,0,0,0" AutoGenerateColumns="False"
                   SelectedItem="{Binding Path=SelectedDish, Mode=TwoWay}"
@@ -48,7 +48,7 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <DataGrid Grid.Row="1" Grid.Column="8" Grid.RowSpan="5" Grid.ColumnSpan="1" 
+        <DataGrid Grid.Row="1" Grid.Column="8" Grid.RowSpan="6" Grid.ColumnSpan="1" 
                   ItemsSource="{Binding MenuDishesBinded}" CanUserAddRows="False" 
                   Margin="0,0,0,0" AutoGenerateColumns="False"
                   SelectedItem="{Binding Path=SelectedDish, Mode=TwoWay}"
@@ -64,16 +64,23 @@
         <TextBlock Text="Categories" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2"
                    Background="Beige" FontSize="20" HorizontalAlignment="Center"/>
 
-        <Button Grid.Row="3" Grid.Column="7" Margin="5">
+        <Button x:Name="AddDishToCategory" Grid.Row="3" Grid.Column="7" Margin="5">
             Add
         </Button>
         
         <!--Row 4-->
-        <ComboBox Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2">
-            Categories
+        <ComboBox Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2"
+                  ItemsSource="{Binding Path=CategoriesBinded}"
+                  SelectedItem="{Binding Path=SelectedCategory}">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Path=Name}"/>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
         </ComboBox>
 
-        <Button Grid.Row="4" Grid.Column="7" Margin="5">
+
+        <Button x:Name="RemoveDishFromCategory" Grid.Row="4" Grid.Column="7" Margin="5">
             Remove
         </Button>
         
