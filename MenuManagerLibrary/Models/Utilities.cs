@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Windows;
 
 namespace MenuManagerLibrary
 {
@@ -43,6 +44,16 @@ namespace MenuManagerLibrary
             double output;
             bool isDouble = Double.TryParse(input, out output);
             return isDouble;
+        }
+
+        public static bool CheckNameValidity(string name)
+        {
+            if (String.IsNullOrWhiteSpace(name))
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }

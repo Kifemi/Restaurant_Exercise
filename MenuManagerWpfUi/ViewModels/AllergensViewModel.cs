@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Windows;
 using System.Text;
 using Caliburn.Micro;
 using MenuManagerLibrary;
@@ -55,6 +56,7 @@ namespace MenuManagerWpfUi.ViewModels
 		public void SaveChanges()
 		{
 			DataHandler.UpdateDishAllergens(new List<AllergenBoolCombination>(AllergenBoolCombinations), SelectedDish);
+			MessageBox.Show("Changes saved");
 		}
 	}
 }

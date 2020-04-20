@@ -14,11 +14,11 @@ namespace MenuManagerLibrary
             return new List<Dish>(dishesBindable);
         }
 
-        public static Dish CreateNewDish(string name, string description, double price)
-        {
-            Dish dish = new Dish(name, description, price);
-            return dish;
-        }
+        //public static Dish CreateNewDish(string name, string description, double price)
+        //{
+        //    Dish dish = new Dish(name, description, price);
+        //    return dish;
+        //}
 
         public static void UpdateAllDishes(MenuManager menuManager, BindableCollection<Dish> dishesBinded)
         {

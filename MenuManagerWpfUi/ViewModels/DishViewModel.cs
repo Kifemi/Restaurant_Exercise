@@ -94,15 +94,15 @@ namespace MenuManagerWpfUi.ViewModels
 
         public void AddDishButton()
         {
-            if (String.IsNullOrWhiteSpace(DishName))
+            if (!Utilities.CheckNameValidity(DishName))
             {
                 MessageBox.Show("Invalid name");
                 return;
             }
 
             DishName = Utilities.UpperCaseFirstLetter(Utilities.TrimLowerCaseString(DishName));
+            Dish newDish = new Dish(DishName, DishDescription, DishPrice);
 
-            Dish newDish = DataHandler.CreateNewDish(DishName, DishDescription, DishPrice);
             if (SelectedMenuManager.AllDishes.Contains(newDish))
             {
                 MessageBox.Show("The dish is already in the list");
