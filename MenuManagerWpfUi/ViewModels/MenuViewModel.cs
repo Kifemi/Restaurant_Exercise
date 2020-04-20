@@ -12,59 +12,44 @@ namespace MenuManagerWpfUi.ViewModels
         private Dish _selectedDish;
         private FoodMenu _selectedMenu;
         private MenuManager _selecterMenuManager;
-        private BindableCollection<Dish> _dishesBinded;
-        private string _dishName;
+        private BindableCollection<Category> _categories;
+        private BindableCollection<Dish> _allDishesBinded;
+        private BindableCollection<Dish> _menuDishesBinded;
 
-        public double DishPrice { get; set; }
-        public string DishDescription { get; set; }
-
-        public string DishName
+        public BindableCollection<Dish> AllDishesBinded
         {
-            get { return _dishName; }
-            set
-            {
-                _dishName = value;
-            }
+            get { return _allDishesBinded; }
+            set { _allDishesBinded = value; }
         }
 
-        public BindableCollection<Dish> DishesBinded
+        public BindableCollection<Dish> MenuDishesBinded
         {
-            get
-            {
-                return _dishesBinded;
-            }
-            set
-            {
-                _dishesBinded = value;
-            }
+            get { return _menuDishesBinded; }
+            set { _menuDishesBinded = value; }
+        }
+
+        public BindableCollection<Category> Categories
+        {
+            get { return _categories; }
+            set { _categories = value; }
         }
 
         public Dish SelectedDish
         {
             get { return _selectedDish; }
-            set
-            {
-                _selectedDish = value;
-                //ShowAllergens();
-            }
+            set { _selectedDish = value; }
         }
 
         public FoodMenu SelectedMenu
         {
             get { return _selectedMenu; }
-            set
-            {
-                _selectedMenu = value;
-            }
+            set { _selectedMenu = value; }
         }
 
         public MenuManager SelectedMenuManager
         {
             get { return _selecterMenuManager; }
-            set
-            {
-                _selecterMenuManager = value;
-            }
+            set{ _selecterMenuManager = value; }
         }
 
 
@@ -74,7 +59,8 @@ namespace MenuManagerWpfUi.ViewModels
         {
             SelectedMenuManager = menuManager;
             SelectedMenu = menu;
-            DishesBinded = new BindableCollection<Dish>(SelectedMenu.MenuDishList);
+            AllDishesBinded = new BindableCollection<Dish>(SelectedMenu.MenuDishList);
+            MenuDishesBinded = new BindableCollection<Dish>(SelectedMenuManager.AllDishes);
         }
 
 

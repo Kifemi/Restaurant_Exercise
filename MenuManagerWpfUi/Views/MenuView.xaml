@@ -4,33 +4,41 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MenuManagerWpfUi.Views"
-             mc:Ignorable="d" Background="Aqua"
+             mc:Ignorable="d" Background="LightBlue"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="10"/>
-            <RowDefinition Height="auto"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="150"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="10"/>
+            <RowDefinition Height="50" />
+            <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20"/>
-            <ColumnDefinition Width="100" />
-            <ColumnDefinition Width="100" />
-            <ColumnDefinition Width="100" />
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="30" />
+            <ColumnDefinition Width="70"/>
+            <ColumnDefinition Width="100"/>
             <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="150" />
+            <ColumnDefinition Width="100" />
+            <ColumnDefinition Width="150" />
             <ColumnDefinition Width="20"/>
         </Grid.ColumnDefinitions>
 
         <!--Row 1-->
+        <TextBlock Text="{Binding Path=SelectedMenu.Name}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"
+                   Background="Beige" FontSize="20" HorizontalAlignment="Center" />
 
-        <DataGrid Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2"
-                  ItemsSource="{Binding DishesBinded}" CanUserAddRows="False" 
-                  Margin="0,10,0,10" AutoGenerateColumns="False"
+
+        <DataGrid Grid.Row="1" Grid.Column="6" Grid.RowSpan="5" Grid.ColumnSpan="1" 
+                  ItemsSource="{Binding AllDishesBinded}" CanUserAddRows="False" 
+                  Margin="0,0,0,0" AutoGenerateColumns="False"
                   SelectedItem="{Binding Path=SelectedDish, Mode=TwoWay}"
                   AlternatingRowBackground="WhiteSmoke">
             <DataGrid.Columns>
@@ -38,31 +46,48 @@
                 <DataGridTextColumn Header="Description" Binding="{Binding Path=Description}" />
                 <DataGridTextColumn Header="Price" Binding="{Binding Path=Price}" />
             </DataGrid.Columns>
-
-
         </DataGrid>
 
-        <!--<ContentControl Grid.Row="1" Grid.Column="3" Grid.RowSpan="2" Grid.ColumnSpan="2"
-                        x:Name="ActiveItem" />
+        <DataGrid Grid.Row="1" Grid.Column="8" Grid.RowSpan="5" Grid.ColumnSpan="1" 
+                  ItemsSource="{Binding MenuDishesBinded}" CanUserAddRows="False" 
+                  Margin="0,0,0,0" AutoGenerateColumns="False"
+                  SelectedItem="{Binding Path=SelectedDish, Mode=TwoWay}"
+                  AlternatingRowBackground="WhiteSmoke">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" Binding="{Binding Path=Name}" />
+                <DataGridTextColumn Header="Description" Binding="{Binding Path=Description}" />
+                <DataGridTextColumn Header="Price" Binding="{Binding Path=Price}" />
+            </DataGrid.Columns>
+        </DataGrid>
+        
+        <!--Row 3-->
+        <TextBlock Text="Categories" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2"
+                   Background="Beige" FontSize="20" HorizontalAlignment="Center"/>
 
-        --><!--Row 3--><!--
-        <TextBox x:Name="DishName" Grid.Row="3" Grid.Column="1"/>
-
-        --><!--Row 4--><!--
-        <TextBox x:Name="DishDescription" Grid.Row="4" Grid.Column="1"/>
-
-        --><!--Row 5--><!--
-        <TextBox x:Name="DishPrice" Grid.Row="5" Grid.Column="1"/>
-
-        --><!--Row 6--><!--
-        <Button Grid.Row="6" Grid.Column="1" Margin="10" x:Name="AddDishButton">
-            Add Dish
+        <Button Grid.Row="3" Grid.Column="7" Margin="5">
+            Add
         </Button>
-        <Button Grid.Row="6" Grid.Column="2" Margin="10" x:Name="RemoveDishButton">
-            Remove Dish
+        
+        <!--Row 4-->
+        <ComboBox Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2">
+            Categories
+        </ComboBox>
+
+        <Button Grid.Row="4" Grid.Column="7" Margin="5">
+            Remove
         </Button>
-        <Button Grid.Row="6" Grid.Column="3" Margin="10" x:Name="ShowAllergens">
-            Show Allergens
-        </Button>-->
+        
+        <!--Row 7-->
+        <Button x:Name="AddCategory" Grid.Row="7" Grid.Column="1" Margin="10">
+            Add Category
+        </Button>
+
+        <Button x:Name="EditCategory" Grid.Row="7" Grid.Column="2" Margin="10" Grid.ColumnSpan="2">
+            Edit Category
+        </Button>
+
+        <Button x:Name="RemoveCategory" Grid.Row="7" Grid.Column="4" Margin="10">
+            Remove Category
+        </Button>
     </Grid>
 </UserControl>

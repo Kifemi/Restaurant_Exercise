@@ -47,7 +47,7 @@ namespace MenuManagerLibrary
         {
 
             menuManager.allMenus.Add(new FoodMenu("A la Carte"));
-            menuManager.allMenus.Add(new FoodMenu("Desserts"));
+            menuManager.allMenus.Add(new FoodMenu("Dinner"));
             AddDish(menuManager, menuManager.allMenus[1], new Dish("Haggis", "I dare you", 15));
             AddDish(menuManager, menuManager.allMenus[1], new Dish("Vodka", "I dare you", 6.7));
             AddDish(menuManager, menuManager.allMenus[1], new Dish("Maggara", "I dare you", 4.7));
