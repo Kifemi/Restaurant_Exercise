@@ -103,7 +103,7 @@ namespace MenuManagerWpfUi.ViewModels
 
         public void AddDishButton()
         {
-            if (!Utilities.CheckNameValidity(DishName))
+            if (Utilities.CheckNameValidity(DishName) == false)
             {
                 MessageBox.Show("Invalid name");
                 return;

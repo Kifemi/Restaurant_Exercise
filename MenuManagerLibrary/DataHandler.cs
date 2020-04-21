@@ -9,11 +9,15 @@ namespace MenuManagerLibrary
 {
     public class DataHandler
     {
-        public static List<Dish> BindableListToNormalList(BindableCollection<Dish> dishesBindable)
+        public static List<Dish> BindableListToDishList(BindableCollection<Dish> dishesBindable)
         {
             return new List<Dish>(dishesBindable);
         }
 
+        public static List<Category> BindableListToCategoriesList(BindableCollection<Category> categoriesBindable)
+        {
+            return new List<Category>(categoriesBindable);
+        }
         //public static Dish CreateNewDish(string name, string description, double price)
         //{
         //    Dish dish = new Dish(name, description, price);
@@ -23,16 +27,24 @@ namespace MenuManagerLibrary
         public static void UpdateAllDishes(MenuManager menuManager, BindableCollection<Dish> dishesBinded)
         {
             menuManager.AllDishes.Clear();
-            menuManager.AllDishes.AddRange(BindableListToNormalList(dishesBinded));
-            //menuManager.allMenus[0].MenuDishList.Clear();
-            //menuManager.allMenus[0].MenuDishList.AddRange(BindableListToNormalList(dishesBinded));
+            menuManager.AllDishes.AddRange(BindableListToDishList(dishesBinded));
+        }
+
+        public static void UpdateAllCategories(FoodMenu menu, BindableCollection<Category> categoriesBinded)
+        {
+            menu.Categories.Clear();
+            menu.Categories.AddRange(BindableListToCategoriesList(categoriesBinded));
         }
 
         public static BindableCollection<Dish> UpdateBindableCollectionDish(List<Dish> list)
         {
-            //bindableCollection.Clear();
-            //bindableCollection = new BindableCollection<Dish>(list);
             BindableCollection<Dish> output = new BindableCollection<Dish>(list);
+            return output;
+        }
+
+        public static BindableCollection<Category> UpdateBindableCollectionCategory(List<Category> list)
+        {
+            BindableCollection<Category> output = new BindableCollection<Category>(list);
             return output;
         }
 

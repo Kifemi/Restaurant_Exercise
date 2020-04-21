@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-//using System.Text;
-//using Caliburn.Micro;
-//using MenuManagerLibrary;
 
 namespace MenuManagerLibrary
 {
@@ -10,7 +7,6 @@ namespace MenuManagerLibrary
     {
         private string _name;
         private List<Category> _categories;
-        //private List<Dish> _menuDishList;
 
         public string Name
         {
@@ -23,18 +19,7 @@ namespace MenuManagerLibrary
             get { return _categories; }
             set { _categories = value; }
         }
-
-        //public List<Dish> MenuDishList
-        //{
-        //    get { return _menuDishList; }
-        //    set { _menuDishList = value; }
-        //}
-
-        
-
-        
-            
-        
+  
 
 
         // Constructors for Menu
@@ -46,12 +31,6 @@ namespace MenuManagerLibrary
             this.Categories = new List<Category>();
             this.Categories.Insert(0, new Category("All dishes in the menu"));
         }
-
-        //public FoodMenu(string name, List<Dish> menuDishList)
-        //{
-        //    this.Name = name;
-        //    this.MenuDishList = menuDishList;
-        //}
 
         
 

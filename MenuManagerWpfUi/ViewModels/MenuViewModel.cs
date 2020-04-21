@@ -13,6 +13,7 @@ namespace MenuManagerWpfUi.ViewModels
         private Category _selectedCategory;
         private FoodMenu _selectedMenu;
         private MenuManager _selecterMenuManager;
+        public string CategoryName { get; set; }
         private BindableCollection<Category> _categoriesBinded;
         private BindableCollection<Dish> _allDishesBinded;
         private BindableCollection<Dish> _menuDishesBinded;
@@ -156,7 +157,24 @@ namespace MenuManagerWpfUi.ViewModels
 
         public void AddCategory()
         {
+            if (Utilities.CheckNameValidity(CategoryName) == false)
+            {
+                MessageBox.Show("Invalid name");
+                return;
+            }
 
+            CategoryName = Utilities.UpperCaseFirstLetter(Utilities.TrimLowerCaseString(CategoryName));
+            Category newCategory = new Category(CategoryName);
+
+            if (SelectedMenu.Categories.Contains(newCategory))
+            {
+                MessageBox.Show("The category already exists");
+            }
+            else
+            {
+                this.CategoriesBinded.Add(newCategory);
+                DataHandler.UpdateAllCategories(SelectedMenu, CategoriesBinded);
+            }
         }
 
         public void RemoveCategory()
@@ -175,9 +193,7 @@ namespace MenuManagerWpfUi.ViewModels
             SelectedMenu.Categories.Remove(SelectedCategory);
             CategoriesBinded.Clear();
             CategoriesBinded = new BindableCollection<Category>(SelectedMenu.Categories);
-            //NotifyOfPropertyChange(() => CategoriesBinded);
             SelectedCategory = SelectedMenu.Categories[0];
-            //NotifyOfPropertyChange(() => SelectedCategory);
         }
     }
 }
