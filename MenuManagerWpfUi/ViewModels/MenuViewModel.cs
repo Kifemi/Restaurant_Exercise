@@ -1,6 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿//using System;
+//using System.Collections.Generic;
+//using System.Text;
 using Caliburn.Micro;
 using MenuManagerLibrary;
 using System.Windows;
@@ -26,18 +26,29 @@ namespace MenuManagerWpfUi.ViewModels
         public BindableCollection<Dish> MenuDishesBinded
         {
             get { return _menuDishesBinded; }
-            set { _menuDishesBinded = value; }
+            set 
+            {
+                _menuDishesBinded = value;
+                NotifyOfPropertyChange(() => MenuDishesBinded);
+            }
         }
 
         public BindableCollection<Category> CategoriesBinded
         {
             get { return _categoriesBinded; }
-            set { _categoriesBinded = value; }
+            set
+            {
+                _categoriesBinded = value;
+                NotifyOfPropertyChange(() => CategoriesBinded);
+            }
         }
 
         public Dish SelectedDish
         {
-            get { return _selectedDish; }
+            get 
+            {
+                return _selectedDish; 
+            }
             set { _selectedDish = value; }
         }
 
@@ -64,14 +75,15 @@ namespace MenuManagerWpfUi.ViewModels
                 }
                
                 _selectedCategory = value;
+                
 
-                if(SelectedCategory == SelectedMenu.Categories[0])
+                if (SelectedCategory == SelectedMenu.Categories[0])
                 {
                     SelectedMenu.Categories[0].ListOfDishes = DataHandler.UpdateMenuDishList(SelectedMenu);
                 }
 
                 MenuDishesBinded = DataHandler.UpdateBindableCollectionDish(value.ListOfDishes);
-                NotifyOfPropertyChange(() => MenuDishesBinded);
+                NotifyOfPropertyChange(() => SelectedCategory);
             }
         }
 
@@ -115,10 +127,7 @@ namespace MenuManagerWpfUi.ViewModels
                 SelectedCategory.ListOfDishes.Add(SelectedDish);
             }
 
-            //MenuDishesBinded.Clear();
-            //MenuDishesBinded = new BindableCollection<Dish>(SelectedCategory.ListOfDishes);
             MenuDishesBinded = DataHandler.UpdateBindableCollectionDish(SelectedCategory.ListOfDishes);
-            NotifyOfPropertyChange(() => MenuDishesBinded);
 
         }
 
@@ -131,20 +140,14 @@ namespace MenuManagerWpfUi.ViewModels
                     category.ListOfDishes.Remove(SelectedDish);  
                 }
 
-                //MenuDishesBinded.Clear();
-                //MenuDishesBinded = new BindableCollection<Dish>(SelectedCategory.ListOfDishes);
                 MenuDishesBinded = DataHandler.UpdateBindableCollectionDish(SelectedCategory.ListOfDishes);
-                NotifyOfPropertyChange(() => MenuDishesBinded);
                 return;
             }
 
             if (SelectedCategory.ListOfDishes.Contains(SelectedDish))
             {
                 SelectedCategory.ListOfDishes.Remove(SelectedDish);
-                //MenuDishesBinded.Clear();
-                //MenuDishesBinded = new BindableCollection<Dish>(SelectedCategory.ListOfDishes);
                 MenuDishesBinded = DataHandler.UpdateBindableCollectionDish(SelectedCategory.ListOfDishes);
-                NotifyOfPropertyChange(() => MenuDishesBinded);
                 return;
             }
 
@@ -172,9 +175,9 @@ namespace MenuManagerWpfUi.ViewModels
             SelectedMenu.Categories.Remove(SelectedCategory);
             CategoriesBinded.Clear();
             CategoriesBinded = new BindableCollection<Category>(SelectedMenu.Categories);
-            NotifyOfPropertyChange(() => CategoriesBinded);
+            //NotifyOfPropertyChange(() => CategoriesBinded);
             SelectedCategory = SelectedMenu.Categories[0];
-            NotifyOfPropertyChange(() => SelectedCategory);
+            //NotifyOfPropertyChange(() => SelectedCategory);
         }
     }
 }

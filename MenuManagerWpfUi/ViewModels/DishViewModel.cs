@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿//using System;
+//using System.Collections.Generic;
+//using System.Text;
 using System.Windows;
 using Caliburn.Micro;
 using MenuManagerLibrary;
-using MenuManagerLibrary.Models;
-using MenuManagerWpfUi.Views;
-using System.Linq;
-using System.Windows.Controls;
+//using MenuManagerLibrary.Models;
+//using MenuManagerWpfUi.Views;
+//using System.Windows.Controls;
 
 namespace MenuManagerWpfUi.ViewModels
 {

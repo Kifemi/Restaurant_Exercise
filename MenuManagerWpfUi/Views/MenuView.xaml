@@ -39,7 +39,7 @@
         <DataGrid Grid.Row="1" Grid.Column="6" Grid.RowSpan="6" Grid.ColumnSpan="1" 
                   ItemsSource="{Binding AllDishesBinded}" CanUserAddRows="False" 
                   Margin="0,0,0,0" AutoGenerateColumns="False"
-                  SelectedItem="{Binding Path=SelectedDish, Mode=TwoWay}"
+                  SelectedItem="{Binding Path=SelectedDish, Mode=OneWayToSource}"
                   AlternatingRowBackground="WhiteSmoke">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Name" Binding="{Binding Path=Name}" />
@@ -51,7 +51,7 @@
         <DataGrid Grid.Row="1" Grid.Column="8" Grid.RowSpan="6" Grid.ColumnSpan="1" 
                   ItemsSource="{Binding MenuDishesBinded}" CanUserAddRows="False" 
                   Margin="0,0,0,0" AutoGenerateColumns="False"
-                  SelectedItem="{Binding Path=SelectedDish, Mode=TwoWay}"
+                  SelectedItem="{Binding Path=SelectedDish, Mode=OneWayToSource}"
                   AlternatingRowBackground="WhiteSmoke">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Name" Binding="{Binding Path=Name}" />

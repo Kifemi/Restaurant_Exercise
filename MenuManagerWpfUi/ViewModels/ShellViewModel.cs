@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿//using System;
+//using System.Collections.Generic;
+//using System.Text;
 using Caliburn.Micro;
 using MenuManagerLibrary;
-using System.Linq;
 
 namespace MenuManagerWpfUi.ViewModels
 {
@@ -31,6 +30,7 @@ namespace MenuManagerWpfUi.ViewModels
             set
             {
                 _selectedMenu = value;
+                NotifyOfPropertyChange(() => SelectedMenu);
                 if(value == null)
                 {
                     return;
@@ -66,6 +66,7 @@ namespace MenuManagerWpfUi.ViewModels
 
         public void ShowDishes()
         {
+            SelectedMenu = null;
             //DishViewModel dishViewModel = new DishViewModel(menuManager);
             ActivateItemAsync(new DishViewModel(menuManager), System.Threading.CancellationToken.None);
         }
