@@ -42,16 +42,16 @@ namespace MenuManagerLibrary
         public FoodMenu(string name)
         {
             this.Name = name;
-            this.MenuDishList = new List<Dish>();
+            //this.MenuDishList = new List<Dish>();
             this.Categories = new List<Category>();
             this.Categories.Insert(0, new Category("All dishes in the menu"));
         }
 
-        public FoodMenu(string name, List<Dish> menuDishList)
-        {
-            this.Name = name;
-            this.MenuDishList = menuDishList;
-        }
+        //public FoodMenu(string name, List<Dish> menuDishList)
+        //{
+        //    this.Name = name;
+        //    this.MenuDishList = menuDishList;
+        //}
 
         
 

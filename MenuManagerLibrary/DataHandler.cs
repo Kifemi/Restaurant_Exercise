@@ -31,13 +31,13 @@ namespace MenuManagerLibrary
 
         public static void AddDish(MenuManager menuManager, FoodMenu menu, Dish dish)
         {
-            if (!menu.MenuDishList.Contains(dish))
+            if (menu.Categories[0].ListOfDishes.Contains(dish) == false)
             {
-                menu.MenuDishList.Add(dish);
+                menu.Categories[0].ListOfDishes.Add(dish);
             }
 
 
-            if (!menuManager.AllDishes.Contains(dish))
+            if (menuManager.AllDishes.Contains(dish) == false)
             {
                 menuManager.AllDishes.Add(dish);
             }
@@ -60,6 +60,8 @@ namespace MenuManagerLibrary
             AddDish(menuManager, menuManager.allMenus[0], new Dish("Nakit ja muusi", "I dare you", 8.0));
             AddDish(menuManager, menuManager.allMenus[0], new Dish("Vodka", "I dare you", 6.7));
             menuManager.allMenus[0].Categories[0].ListOfDishes.Add(menuManager.AllDishes[0]);
+            menuManager.allMenus[0].Categories[1].ListOfDishes.Add(menuManager.AllDishes[1]);
+            menuManager.allMenus[0].Categories[2].ListOfDishes.Add(menuManager.AllDishes[2]);
         }
 
         public static void CreatePresetAllergens(MenuManager menuManager)

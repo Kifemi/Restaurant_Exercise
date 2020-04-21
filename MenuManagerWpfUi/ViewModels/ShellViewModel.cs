@@ -31,6 +31,14 @@ namespace MenuManagerWpfUi.ViewModels
             set
             {
                 _selectedMenu = value;
+                if(value == null)
+                {
+                    return;
+                }
+                else
+                {
+                    ShowMenu();
+                }
             }
         }
 

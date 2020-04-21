@@ -86,15 +86,15 @@
         
         <!--Row 7-->
         <Button x:Name="AddCategory" Grid.Row="7" Grid.Column="1" Margin="10">
-            Add Category
+            Add
         </Button>
 
         <Button x:Name="EditCategory" Grid.Row="7" Grid.Column="2" Margin="10" Grid.ColumnSpan="2">
-            Edit Category
+            Edit
         </Button>
 
         <Button x:Name="RemoveCategory" Grid.Row="7" Grid.Column="4" Margin="10">
-            Remove Category
+            Remove
         </Button>
     </Grid>
 </UserControl>

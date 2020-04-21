@@ -45,9 +45,9 @@
                         x:Name="ActiveItem" />
        
         <!--Row 3-->
-        <Button x:Name="ShowMenu" Grid.Row="3" Grid.Column="1" Margin="10">
+        <!--<Button x:Name="ShowMenu" Grid.Row="3" Grid.Column="1" Margin="10">
             Show Menu
-        </Button>
+        </Button>-->
         <!--Row 4-->
         <Button x:Name="Categories" Grid.Row="4" Grid.Column="1" Margin="10">
             Add Menu
