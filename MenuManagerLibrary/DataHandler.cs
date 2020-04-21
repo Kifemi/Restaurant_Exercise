@@ -26,7 +26,32 @@ namespace MenuManagerLibrary
             menuManager.AllDishes.AddRange(BindableListToNormalList(dishesBinded));
             //menuManager.allMenus[0].MenuDishList.Clear();
             //menuManager.allMenus[0].MenuDishList.AddRange(BindableListToNormalList(dishesBinded));
+        }
 
+        public static BindableCollection<Dish> UpdateBindableCollectionDish(List<Dish> list)
+        {
+            //bindableCollection.Clear();
+            //bindableCollection = new BindableCollection<Dish>(list);
+            BindableCollection<Dish> output = new BindableCollection<Dish>(list);
+            return output;
+        }
+
+        public static List<Dish> UpdateMenuDishList(FoodMenu menu)
+        {
+            List<Dish> output = new List<Dish>();
+
+            foreach (Category category in menu.Categories)
+            {
+                foreach (Dish dish in category.ListOfDishes)
+                {
+                    if(output.Contains(dish) == false)
+                    {
+                        output.Add(dish);
+                    }
+                }
+            }
+
+            return output;
         }
 
         public static void AddDish(MenuManager menuManager, FoodMenu menu, Dish dish)
@@ -110,6 +135,7 @@ namespace MenuManagerLibrary
             dish.Allergens = dishAllergensUpdated;
         }
        
+            
         
     }
 }

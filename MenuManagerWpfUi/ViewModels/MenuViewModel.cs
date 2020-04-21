@@ -62,11 +62,15 @@ namespace MenuManagerWpfUi.ViewModels
                 {
                     return;
                 }
-
-                //Add if(category is menu.categories[0] then foreach category add dishes to list)
+               
                 _selectedCategory = value;
-                MenuDishesBinded.Clear();
-                MenuDishesBinded = new BindableCollection<Dish>(value.ListOfDishes);
+
+                if(SelectedCategory == SelectedMenu.Categories[0])
+                {
+                    SelectedMenu.Categories[0].ListOfDishes = DataHandler.UpdateMenuDishList(SelectedMenu);
+                }
+
+                MenuDishesBinded = DataHandler.UpdateBindableCollectionDish(value.ListOfDishes);
                 NotifyOfPropertyChange(() => MenuDishesBinded);
             }
         }
@@ -79,7 +83,7 @@ namespace MenuManagerWpfUi.ViewModels
             SelectedMenuManager = menuManager;
             SelectedMenu = menu;
             AllDishesBinded = new BindableCollection<Dish>(SelectedMenuManager.AllDishes);
-            MenuDishesBinded = new BindableCollection<Dish>(SelectedMenu.Categories[0].ListOfDishes);
+            MenuDishesBinded = new BindableCollection<Dish>(DataHandler.UpdateMenuDishList(SelectedMenu));
             CategoriesBinded = new BindableCollection<Category>(SelectedMenu.Categories);
             SelectedCategory = SelectedMenu.Categories[0];
         }
@@ -106,9 +110,14 @@ namespace MenuManagerWpfUi.ViewModels
                 SelectedMenu.Categories[0].ListOfDishes.Add(SelectedDish);
             }
 
-            SelectedCategory.ListOfDishes.Add(SelectedDish);
-            MenuDishesBinded.Clear();
-            MenuDishesBinded = new BindableCollection<Dish>(SelectedCategory.ListOfDishes);
+            if(SelectedCategory != SelectedMenu.Categories[0])
+            {
+                SelectedCategory.ListOfDishes.Add(SelectedDish);
+            }
+
+            //MenuDishesBinded.Clear();
+            //MenuDishesBinded = new BindableCollection<Dish>(SelectedCategory.ListOfDishes);
+            MenuDishesBinded = DataHandler.UpdateBindableCollectionDish(SelectedCategory.ListOfDishes);
             NotifyOfPropertyChange(() => MenuDishesBinded);
 
         }
@@ -122,8 +131,9 @@ namespace MenuManagerWpfUi.ViewModels
                     category.ListOfDishes.Remove(SelectedDish);  
                 }
 
-                MenuDishesBinded.Clear();
-                MenuDishesBinded = new BindableCollection<Dish>(SelectedCategory.ListOfDishes);
+                //MenuDishesBinded.Clear();
+                //MenuDishesBinded = new BindableCollection<Dish>(SelectedCategory.ListOfDishes);
+                MenuDishesBinded = DataHandler.UpdateBindableCollectionDish(SelectedCategory.ListOfDishes);
                 NotifyOfPropertyChange(() => MenuDishesBinded);
                 return;
             }
@@ -131,8 +141,9 @@ namespace MenuManagerWpfUi.ViewModels
             if (SelectedCategory.ListOfDishes.Contains(SelectedDish))
             {
                 SelectedCategory.ListOfDishes.Remove(SelectedDish);
-                MenuDishesBinded.Clear();
-                MenuDishesBinded = new BindableCollection<Dish>(SelectedCategory.ListOfDishes);
+                //MenuDishesBinded.Clear();
+                //MenuDishesBinded = new BindableCollection<Dish>(SelectedCategory.ListOfDishes);
+                MenuDishesBinded = DataHandler.UpdateBindableCollectionDish(SelectedCategory.ListOfDishes);
                 NotifyOfPropertyChange(() => MenuDishesBinded);
                 return;
             }
