@@ -134,6 +134,8 @@ namespace MenuManagerWpfUi.ViewModels
 
         public void RemoveDishFromCategory()
         {
+            Dish SelectedDishCopy = SelectedDish;
+
             if(SelectedCategory == SelectedMenu.Categories[0])
             {
                 foreach (Category category in SelectedMenu.Categories)
@@ -142,6 +144,7 @@ namespace MenuManagerWpfUi.ViewModels
                 }
 
                 MenuDishesBinded = DataHandler.UpdateBindableCollectionDish(SelectedCategory.ListOfDishes);
+                SelectedDish = SelectedDishCopy;
                 return;
             }
 
@@ -149,8 +152,10 @@ namespace MenuManagerWpfUi.ViewModels
             {
                 SelectedCategory.ListOfDishes.Remove(SelectedDish);
                 MenuDishesBinded = DataHandler.UpdateBindableCollectionDish(SelectedCategory.ListOfDishes);
+                SelectedDish = SelectedDishCopy;
                 return;
             }
+
 
             MessageBox.Show("The dish is not in the list");
         }
@@ -190,10 +195,37 @@ namespace MenuManagerWpfUi.ViewModels
                 return;
             }
 
-            SelectedMenu.Categories.Remove(SelectedCategory);
+            CategoriesBinded.Remove(SelectedCategory);
+            DataHandler.UpdateAllCategories(SelectedMenu, CategoriesBinded);
+            SelectedCategory = SelectedMenu.Categories[0];
+        }
+
+        public void EditCategory()
+        {
+            if (Utilities.CheckNameValidity(CategoryName) == false)
+            {
+                MessageBox.Show("Invalid name");
+                return;
+            }
+
+            foreach (Category category in SelectedMenu.Categories)
+            {
+                if (category.Name == CategoryName)
+                {
+                    MessageBox.Show("The category already exists");
+                    return;
+                }
+            }
+
+            if(SelectedCategory == SelectedMenu.Categories[0])
+            {
+                MessageBox.Show("Can't edit this category");
+                return;
+            }
+
+            SelectedCategory.Name = Utilities.UpperCaseFirstLetter(Utilities.TrimLowerCaseString(CategoryName));
             CategoriesBinded.Clear();
             CategoriesBinded = new BindableCollection<Category>(SelectedMenu.Categories);
-            SelectedCategory = SelectedMenu.Categories[0];
         }
     }
 }

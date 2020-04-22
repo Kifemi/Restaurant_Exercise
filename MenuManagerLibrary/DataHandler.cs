@@ -9,15 +9,15 @@ namespace MenuManagerLibrary
 {
     public class DataHandler
     {
-        public static List<Dish> BindableListToDishList(BindableCollection<Dish> dishesBindable)
-        {
-            return new List<Dish>(dishesBindable);
-        }
+        //public static List<Dish> BindableListToDishList(BindableCollection<Dish> dishesBindable)
+        //{
+        //    return new List<Dish>(dishesBindable);
+        //}
 
-        public static List<Category> BindableListToCategoriesList(BindableCollection<Category> categoriesBindable)
-        {
-            return new List<Category>(categoriesBindable);
-        }
+        //public static List<Category> BindableListToCategoriesList(BindableCollection<Category> categoriesBindable)
+        //{
+        //    return new List<Category>(categoriesBindable);
+        //}
         //public static Dish CreateNewDish(string name, string description, double price)
         //{
         //    Dish dish = new Dish(name, description, price);
@@ -27,13 +27,13 @@ namespace MenuManagerLibrary
         public static void UpdateAllDishes(MenuManager menuManager, BindableCollection<Dish> dishesBinded)
         {
             menuManager.AllDishes.Clear();
-            menuManager.AllDishes.AddRange(BindableListToDishList(dishesBinded));
+            menuManager.AllDishes.AddRange(new List<Dish>(dishesBinded));
         }
 
         public static void UpdateAllCategories(FoodMenu menu, BindableCollection<Category> categoriesBinded)
         {
             menu.Categories.Clear();
-            menu.Categories.AddRange(BindableListToCategoriesList(categoriesBinded));
+            menu.Categories.AddRange(new List<Category>(categoriesBinded));
         }
 
         public static BindableCollection<Dish> UpdateBindableCollectionDish(List<Dish> list)
@@ -42,11 +42,11 @@ namespace MenuManagerLibrary
             return output;
         }
 
-        public static BindableCollection<Category> UpdateBindableCollectionCategory(List<Category> list)
-        {
-            BindableCollection<Category> output = new BindableCollection<Category>(list);
-            return output;
-        }
+        //public static BindableCollection<Category> UpdateBindableCollectionCategory(List<Category> list)
+        //{
+        //    BindableCollection<Category> output = new BindableCollection<Category>(list);
+        //    return output;
+        //}
 
         public static List<Dish> UpdateMenuDishList(FoodMenu menu)
         {

@@ -67,7 +67,6 @@ namespace MenuManagerWpfUi.ViewModels
         public void ShowDishes()
         {
             SelectedMenu = null;
-            //DishViewModel dishViewModel = new DishViewModel(menuManager);
             ActivateItemAsync(new DishViewModel(menuManager), System.Threading.CancellationToken.None);
         }
     }
