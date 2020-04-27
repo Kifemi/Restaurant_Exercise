@@ -21,7 +21,10 @@ namespace MenuManagerWpfUi.ViewModels
         public BindableCollection<Dish> AllDishesBinded
         {
             get { return _allDishesBinded; }
-            set { _allDishesBinded = value; }
+            set 
+            { 
+                _allDishesBinded = value; 
+            }
         }
 
         public BindableCollection<Dish> MenuDishesBinded
@@ -93,11 +96,13 @@ namespace MenuManagerWpfUi.ViewModels
         // Constructor for DishViewModel
         public MenuViewModel(MenuManager menuManager, FoodMenu menu)
         {
+            DataAccess da = new DataAccess();
             SelectedMenuManager = menuManager;
             SelectedMenu = menu;
-            AllDishesBinded = new BindableCollection<Dish>(SelectedMenuManager.AllDishes);
+            AllDishesBinded = new BindableCollection<Dish>(da.GetDishes());
             MenuDishesBinded = new BindableCollection<Dish>(DataHandler.UpdateMenuDishList(SelectedMenu));
-            CategoriesBinded = new BindableCollection<Category>(SelectedMenu.Categories);
+            //CategoriesBinded = new BindableCollection<Category>(SelectedMenu.Categories);
+            CategoriesBinded = new BindableCollection<Category>(da.GetCategories());
             SelectedCategory = SelectedMenu.Categories[0];
         }
         
@@ -151,6 +156,7 @@ namespace MenuManagerWpfUi.ViewModels
             if (SelectedCategory.ListOfDishes.Contains(SelectedDish))
             {
                 SelectedCategory.ListOfDishes.Remove(SelectedDish);
+                NotifyOfPropertyChange((() => AllDishesBinded));
                 MenuDishesBinded = DataHandler.UpdateBindableCollectionDish(SelectedCategory.ListOfDishes);
                 SelectedDish = SelectedDishCopy;
                 return;
@@ -160,27 +166,27 @@ namespace MenuManagerWpfUi.ViewModels
             MessageBox.Show("The dish is not in the list");
         }
 
-        public void AddCategory()
-        {
-            if (Utilities.CheckNameValidity(CategoryName) == false)
-            {
-                MessageBox.Show("Invalid name");
-                return;
-            }
+        //public void AddCategory()
+        //{
+        //    if (Utilities.CheckNameValidity(CategoryName) == false)
+        //    {
+        //        MessageBox.Show("Invalid name");
+        //        return;
+        //    }
 
-            CategoryName = Utilities.UpperCaseFirstLetter(Utilities.TrimLowerCaseString(CategoryName));
-            Category newCategory = new Category(CategoryName);
+        //    CategoryName = Utilities.UpperCaseFirstLetter(Utilities.TrimLowerCaseString(CategoryName));
+        //    Category newCategory = new Category(CategoryName);
 
-            if (SelectedMenu.Categories.Contains(newCategory))
-            {
-                MessageBox.Show("The category already exists");
-            }
-            else
-            {
-                this.CategoriesBinded.Add(newCategory);
-                DataHandler.UpdateAllCategories(SelectedMenu, CategoriesBinded);
-            }
-        }
+        //    if (SelectedMenu.Categories.Contains(newCategory))
+        //    {
+        //        MessageBox.Show("The category already exists");
+        //    }
+        //    else
+        //    {
+        //        this.CategoriesBinded.Add(newCategory);
+        //        DataHandler.UpdateAllCategories(SelectedMenu, CategoriesBinded);
+        //    }
+        //}
 
         public void RemoveCategory()
         {

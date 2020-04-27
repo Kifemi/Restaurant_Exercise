@@ -45,13 +45,15 @@ namespace MenuManagerWpfUi.ViewModels
         // Constructor for ShellViewModel
         public ShellViewModel()
         {
+            DataAccess da = new DataAccess();
             menuManager = new MenuManager();
-            DataHandler.FillDishesWithDemoData(menuManager);
-            DataHandler.CreatePresetAllergens(menuManager);
-            MenusBinded = new BindableCollection<FoodMenu>(menuManager.allMenus);
-            menuManager.AllDishes[0].Allergens.Add(menuManager.allAllergens[0]);
-            menuManager.AllDishes[0].Allergens.Add(menuManager.allAllergens[1]);
-            menuManager.AllDishes[0].Allergens.Add(menuManager.allAllergens[2]);
+            //DataHandler.FillDishesWithDemoData(menuManager);
+            //DataHandler.CreatePresetAllergens(menuManager);
+            MenusBinded = new BindableCollection<FoodMenu>(da.GetMenus());
+            //MenusBinded = new BindableCollection<FoodMenu>(menuManager.allMenus);
+            //menuManager.AllDishes[0].Allergens.Add(menuManager.allAllergens[0]);
+            //menuManager.AllDishes[0].Allergens.Add(menuManager.allAllergens[1]);
+            //menuManager.AllDishes[0].Allergens.Add(menuManager.allAllergens[2]);
 
         }
 

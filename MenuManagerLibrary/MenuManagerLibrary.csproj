@@ -6,6 +6,9 @@
 
   <ItemGroup>
     <PackageReference Include="Caliburn.Micro" Version="4.0.105-alpha" />
+    <PackageReference Include="Dapper" Version="2.0.35" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="5.0.0-preview.3.20214.6" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.1" />
   </ItemGroup>
 
 </Project>

@@ -8,15 +8,22 @@ namespace MenuManagerLibrary
 {
     public class Dish
     {
+        private int _dishId;
         private string _name;
         private string _description;
-        private double _price;
+        private decimal _price;
         private List<Allergen> _allergens;
 
         public List<Allergen> Allergens
         {
             get { return _allergens; }
             set { _allergens = value; }
+        }
+
+        public int DishId
+        {
+            get { return _dishId; }
+            set { _dishId = value; }
         }
 
         public string Name
@@ -31,7 +38,7 @@ namespace MenuManagerLibrary
             set { _description = value; }
         }
 
-        public double Price
+        public decimal Price
         {
             get { return _price; }
             set { _price = value; }
@@ -39,8 +46,17 @@ namespace MenuManagerLibrary
 
 
         // Constructor for the Dish
-        public Dish(string name, string description, double price)
+        public Dish(string name, string description, decimal price)
         {
+            this.Name = name;
+            this.Description = description;
+            this.Price = price;
+            this.Allergens = new List<Allergen>();
+        }
+
+        public Dish(int DishId, string name, string description, decimal price)
+        {
+            this.DishId = DishId;
             this.Name = name;
             this.Description = description;
             this.Price = price;

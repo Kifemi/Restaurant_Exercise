@@ -21,7 +21,6 @@ namespace MenuManagerWpfUi.ViewModels
 			set { _allergenBoolCombinations = value; }
 		}
 
-
 		public Dish SelectedDish
 		{
 			get { return _selectedDish; }

@@ -6,8 +6,15 @@ namespace MenuManagerLibrary
 {
     public class Category
     {
+		private int _categoryId;
 		private string name;
 		private List<Dish> listOfDishes;
+
+		public int CategoryId
+		{
+			get { return _categoryId; }
+			set { _categoryId = value; }
+		}
 
 		public string Name
 		{
@@ -21,8 +28,9 @@ namespace MenuManagerLibrary
 			set { listOfDishes = value; }
 		}
 
-		public Category(string name)
+		public Category(int categoryId, string name)
 		{
+			this.CategoryId = categoryId;
 			this.Name = name;
 			this.ListOfDishes = new List<Dish>();
 		}

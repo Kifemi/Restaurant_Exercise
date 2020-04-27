@@ -21,7 +21,7 @@ namespace MenuManagerWpfUi.ViewModels
 
 
         private string _dishName;
-        public double DishPrice { get; set; }
+        public decimal DishPrice { get; set; }
         public string DishDescription { get; set; }
 
         public string DishName
@@ -88,7 +88,9 @@ namespace MenuManagerWpfUi.ViewModels
         {
             SelectedMenuManager = menuManager;
             //SelectedMenu = menu;
-            DishesBinded = new BindableCollection<Dish>(menuManager.AllDishes);
+            DataAccess da = new DataAccess();
+            //DishesBinded = new BindableCollection<Dish>(menuManager.AllDishes);
+            DishesBinded = new BindableCollection<Dish>(da.GetDishes());
         }       
 
 
@@ -121,8 +123,6 @@ namespace MenuManagerWpfUi.ViewModels
                 this.DishesBinded.Add(newDish);
                 DataHandler.UpdateAllDishes(SelectedMenuManager, DishesBinded);
             }
-            
-
         }
 
         public bool CanRemoveDishButton()

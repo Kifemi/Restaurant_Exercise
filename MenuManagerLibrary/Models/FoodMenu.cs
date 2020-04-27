@@ -5,8 +5,15 @@ namespace MenuManagerLibrary
 {
     public class FoodMenu
     {
+        private int _foodMenuId;
         private string _name;
         private List<Category> _categories;
+
+        public int FoodMenuId
+        {
+            get { return _foodMenuId; }
+            set { _foodMenuId = value; }
+        }
 
         public string Name
         {
@@ -24,12 +31,13 @@ namespace MenuManagerLibrary
 
         // Constructors for Menu
 
-        public FoodMenu(string name)
+        public FoodMenu(int foodMenuId, string name)
         {
+            this.FoodMenuId = foodMenuId;
             this.Name = name;
             //this.MenuDishList = new List<Dish>();
             this.Categories = new List<Category>();
-            this.Categories.Insert(0, new Category("All dishes in the menu"));
+            //this.Categories.Insert(0, new Category("All dishes in the menu"));
         }
 
         
