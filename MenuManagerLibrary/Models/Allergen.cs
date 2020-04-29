@@ -7,8 +7,15 @@ namespace MenuManagerLibrary.Models
     public class Allergen
     {
 		private string _name;
+        private int _allergenId;
 
-		public string Name
+        public int AllergenId
+        {
+            get { return _allergenId; }
+            set { _allergenId = value; }
+        }
+
+        public string Name
 		{
 			get { return _name; }
 			set { _name = value; }
@@ -18,6 +25,12 @@ namespace MenuManagerLibrary.Models
 		{
 			this.Name = name;
 		}
+
+        public Allergen(int allergenId, string name)
+        {
+            this.AllergenId = allergenId;
+            this.Name = name;
+        }
 
 
         public override bool Equals(object obj)

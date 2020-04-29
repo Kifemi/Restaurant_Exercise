@@ -61,9 +61,9 @@
         <Button Grid.Row="6" Grid.Column="2" Margin="10" x:Name="RemoveDishButton">
             Remove Dish
         </Button>
-        <!--<Button Grid.Row="6" Grid.Column="3" Margin="10" x:Name="ShowAllergens">
-            Show Allergens
-        </Button>-->
+        <Button Grid.Row="6" Grid.Column="3" Margin="10" x:Name="EditDish">
+            Edit Dish
+        </Button>
 
         
     </Grid>

@@ -42,6 +42,7 @@ namespace MenuManagerWpfUi.ViewModels
             set
             {
                 _dishesBinded = value;
+                NotifyOfPropertyChange(() => DishesBinded);
             }
         }
 
@@ -110,39 +111,55 @@ namespace MenuManagerWpfUi.ViewModels
                 MessageBox.Show("Invalid name");
                 return;
             }
-
+            DataAccess da = new DataAccess();
+            
             DishName = Utilities.UpperCaseFirstLetter(Utilities.TrimLowerCaseString(DishName));
-            Dish newDish = new Dish(DishName, DishDescription, DishPrice);
-
-            if (SelectedMenuManager.AllDishes.Contains(newDish))
+            Dish newDish = new Dish(this.DishName, this.DishDescription, this.DishPrice);
+            
+            if (da.dishExists(newDish))
             {
                 MessageBox.Show("The dish is already in the list");
+                return;
             }
-            else
-            {
-                this.DishesBinded.Add(newDish);
-                DataHandler.UpdateAllDishes(SelectedMenuManager, DishesBinded);
-            }
+
+            da.insertDish(newDish);
+
+            this.DishName = "";
+            this.DishDescription = "";
+            this.DishPrice = 0;
+
+            DishesBinded = new BindableCollection<Dish>(da.GetDishes());
         }
 
-        public bool CanRemoveDishButton()
-        {
-            if(this.DishesBinded.Count > 0)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
 
         public void RemoveDishButton()
         {
-            
-            SelectedMenuManager.AllDishes.Remove(SelectedDish);
-            DishesBinded.Remove(SelectedDish);
-            DataHandler.UpdateAllDishes(SelectedMenuManager, DishesBinded);
+            DataAccess da = new DataAccess();
+            da.deleteDish(SelectedDish);
+
+            DishesBinded = new BindableCollection<Dish>(da.GetDishes());
+        }
+
+        public void EditDish()
+        {
+            DataAccess da = new DataAccess();
+
+            if (Utilities.CheckNameValidity(DishName) == false)
+            {
+                MessageBox.Show("Invalid name");
+                return;
+            }
+
+            DishName = Utilities.UpperCaseFirstLetter(Utilities.TrimLowerCaseString(DishName));
+            Dish newDish = new Dish(this.DishName, this.DishDescription, this.DishPrice);
+            newDish.DishId = SelectedDish.DishId;
+            da.editDish(newDish);
+
+            this.DishName = "";
+            this.DishDescription = "";
+            this.DishPrice = 0;
+
+            DishesBinded = new BindableCollection<Dish>(da.GetDishes());
         }
     }
 }

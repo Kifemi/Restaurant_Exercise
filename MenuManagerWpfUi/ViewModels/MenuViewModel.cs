@@ -103,7 +103,7 @@ namespace MenuManagerWpfUi.ViewModels
             MenuDishesBinded = new BindableCollection<Dish>(DataHandler.UpdateMenuDishList(SelectedMenu));
             //CategoriesBinded = new BindableCollection<Category>(SelectedMenu.Categories);
             CategoriesBinded = new BindableCollection<Category>(da.GetCategories());
-            SelectedCategory = SelectedMenu.Categories[0];
+            //SelectedCategory = SelectedMenu.Categories[0];
         }
         
 

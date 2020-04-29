@@ -8,12 +8,19 @@ namespace MenuManagerLibrary
     {
 		private int _categoryId;
 		private string name;
+		private int _menuId;
 		private List<Dish> listOfDishes;
 
 		public int CategoryId
 		{
 			get { return _categoryId; }
 			set { _categoryId = value; }
+		}
+
+		public int MenuId
+		{
+			get { return _menuId; }
+			set { _menuId= value; }
 		}
 
 		public string Name
@@ -35,6 +42,13 @@ namespace MenuManagerLibrary
 			this.ListOfDishes = new List<Dish>();
 		}
 
+		public Category(int categoryId, string name, int menuId)
+		{
+			this.CategoryId = categoryId;
+			this.Name = name;
+			this.ListOfDishes = new List<Dish>();
+			this.MenuId = MenuId;
+		}
 
 		// Overrides
 

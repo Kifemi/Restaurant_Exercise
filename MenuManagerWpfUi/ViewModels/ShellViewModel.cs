@@ -71,5 +71,10 @@ namespace MenuManagerWpfUi.ViewModels
             SelectedMenu = null;
             ActivateItemAsync(new DishViewModel(menuManager), System.Threading.CancellationToken.None);
         }
+
+        public void AddAllergen()
+        {
+
+        }
     }
 }
