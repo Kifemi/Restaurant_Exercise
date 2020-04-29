@@ -71,6 +71,9 @@
     <Build Include="StoredProcedures\spDish_Delete.sql" />
     <Build Include="StoredProcedures\spDish_Exists.sql" />
     <Build Include="dbo\Tables\DishAllergenCombo.sql" />
+    <Build Include="StoredProcedures\spDish_Edit.sql" />
+    <Build Include="StoredProcedures\spDish_DeleteAllergens.sql" />
+    <Build Include="StoredProcedures\spDish_InsertAllergen.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="Refractorlog\MenuManagerSQLDB.refactorlog" />

@@ -43,11 +43,9 @@ namespace MenuManagerWpfUi.ViewModels
 		// Constructor for AllergensViewModel
 		public AllergensViewModel(MenuManager menuManager, FoodMenu menu, Dish dish)
 		{
-			DataAccess da = new DataAccess();
 			this.SelectedDish = dish;
 			this.SelectedMenu = menu;
 			this.SelectedMenuManager = menuManager;
-			//this.AllergenBoolCombinations = new BindableCollection<AllergenBoolCombination>(DataHandler.CombineAllergenAndBool(SelectedMenuManager, SelectedDish.Allergens));
 			this.AllergenBoolCombinations = new BindableCollection<AllergenBoolCombination>(DataHandler.CombineAllergenAndBool(SelectedDish));
 		}
 
@@ -56,7 +54,16 @@ namespace MenuManagerWpfUi.ViewModels
 
 		public void SaveChanges()
 		{
-			//DataHandler.UpdateDishAllergens(new List<AllergenBoolCombination>(AllergenBoolCombinations), SelectedDish);
+			DataAccess da = new DataAccess();
+			da.dishDeleteAllergens(SelectedDish);
+
+			foreach (AllergenBoolCombination combo in AllergenBoolCombinations)
+			{
+				if (combo.hasAllergen)
+				{
+					da.insertDishAllergenCombo(SelectedDish, combo.allergen);
+				}
+			}
 
 			MessageBox.Show("Changes saved");
 		}

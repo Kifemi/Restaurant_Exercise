@@ -103,17 +103,6 @@ namespace MenuManagerLibrary
                     da.insertDishAllergenCombo(dish, allergenBool.allergen);
                 }
             }
-            //List<Allergen> dishAllergensUpdated = new List<Allergen>();
-
-            //foreach (AllergenBoolCombination allergenBool in combinationList)
-            //{
-            //    if (allergenBool.hasAllergen == true)
-            //    {
-            //        dishAllergensUpdated.Add(allergenBool.allergen);
-            //    }
-            //}
-
-            //dish.Allergens = dishAllergensUpdated;
         }
        
             
