@@ -26,14 +26,20 @@ namespace MenuManagerLibrary
             get { return _categories; }
             set { _categories = value; }
         }
-  
+
 
 
         // Constructors for Menu
 
-        public FoodMenu(int foodMenuId, string name)
+        public FoodMenu(string name)
         {
-            this.FoodMenuId = foodMenuId;
+            this.Name = name;
+            this.Categories = new List<Category>();
+        }
+
+        public FoodMenu(int FoodMenuId, string name)
+        {
+            this.FoodMenuId = FoodMenuId;
             this.Name = name;
             //this.MenuDishList = new List<Dish>();
             this.Categories = new List<Category>();

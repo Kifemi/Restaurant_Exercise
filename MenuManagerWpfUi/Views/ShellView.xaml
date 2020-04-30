@@ -45,16 +45,14 @@
                         x:Name="ActiveItem" />
        
         <!--Row 3-->
-        <!--<Button x:Name="ShowMenu" Grid.Row="3" Grid.Column="1" Margin="10">
-            Show Menu
-        </Button>-->
+        <TextBox x:Name="MenuName" Grid.Row="3" Grid.Column="1" Margin="10"/>
         <!--Row 4-->
-        <Button x:Name="Categories" Grid.Row="4" Grid.Column="1" Margin="10">
+        <Button x:Name="AddMenuButton" Grid.Row="4" Grid.Column="1" Margin="10">
             Add Menu
         </Button>
         <!--Row 5-->
-        <Button x:Name="AddAllergen" Grid.Row="5" Grid.Column="1" Margin="10"> 
-            Add Allergen
+        <Button x:Name="RemoveMenuButton" Grid.Row="5" Grid.Column="1" Margin="10"> 
+            Remove Menu
         </Button>
         
         

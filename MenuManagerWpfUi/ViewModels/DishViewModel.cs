@@ -30,6 +30,7 @@ namespace MenuManagerWpfUi.ViewModels
             set
             {
                 _dishName = value;
+                NotifyOfPropertyChange(() => DishName);
             }
         }
 
@@ -155,9 +156,10 @@ namespace MenuManagerWpfUi.ViewModels
             newDish.DishId = SelectedDish.DishId;
             da.editDish(newDish);
 
-            this.DishName = "";
+            
             this.DishDescription = "";
             this.DishPrice = 0;
+            this.DishName = "";
 
             DishesBinded = new BindableCollection<Dish>(da.GetDishes());
         }

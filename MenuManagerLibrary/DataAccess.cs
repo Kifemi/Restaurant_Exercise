@@ -54,11 +54,28 @@ namespace MenuManagerLibrary
             }
         }
 
+        public void insertMenu(FoodMenu menu)
+        {
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("MenuManagerDB")))
+            {
+                connection.Execute("dbo.spFoodMenu_Insert @Name", menu);
+            }
+        }
+
         public void deleteDish(Dish dish)
         {
             using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("MenuManagerDB")))
             {
+                connection.Execute("dbo.spDish_DeleteAllergenDishCombo @DishId", dish);
                 connection.Execute("dbo.spDish_Delete @DishId", dish);
+            }
+        }
+
+        public void deleteMenu(FoodMenu menu)
+        {
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("MenuManagerDB")))
+            {
+                connection.Execute("dbo.spFoodMenu_Delete @FoodMenuId", menu);
             }
         }
 
@@ -81,6 +98,22 @@ namespace MenuManagerLibrary
                     return false;
                 }
                 else 
+                {
+                    return true;
+                }
+            }
+        }
+
+        public bool menuExists(FoodMenu menu)
+        {
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("MenuManagerDB")))
+            {
+                var menus = connection.Query<FoodMenu>("SELECT * FROM dbo.FoodMenu WHERE Name = @Name", menu).ToList();
+                if (menus.Count == 0)
+                {
+                    return false;
+                }
+                else
                 {
                     return true;
                 }

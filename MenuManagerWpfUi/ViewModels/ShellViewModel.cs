@@ -1,6 +1,7 @@
-﻿//using System;
-//using System.Collections.Generic;
-//using System.Text;
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Windows;
 using Caliburn.Micro;
 using MenuManagerLibrary;
 
@@ -11,11 +12,27 @@ namespace MenuManagerWpfUi.ViewModels
         private MenuManager _menuManager;
         private FoodMenu _selectedMenu;
         private BindableCollection<FoodMenu> _menusBinded;
+        private string _menuName;
+
+        public string MenuName
+        {
+            get { return _menuName; }
+            set 
+            { 
+                _menuName = value;
+                NotifyOfPropertyChange(() => MenuName);
+            }
+        }
+
 
         public BindableCollection<FoodMenu> MenusBinded
         {
             get { return _menusBinded; }
-            set { _menusBinded = value; }
+            set
+            { 
+                _menusBinded = value;
+                NotifyOfPropertyChange(() => MenusBinded);
+            }
         }
 
         public MenuManager menuManager
@@ -72,9 +89,37 @@ namespace MenuManagerWpfUi.ViewModels
             ActivateItemAsync(new DishViewModel(menuManager), System.Threading.CancellationToken.None);
         }
 
-        public void AddAllergen()
+        public void AddMenuButton()
         {
+            if (Utilities.CheckNameValidity(MenuName) == false)
+            {
+                MessageBox.Show("Invalid name");
+                return;
+            }
+            DataAccess da = new DataAccess();
 
+            MenuName = Utilities.UpperCaseFirstLetter(Utilities.TrimLowerCaseString(MenuName));
+            FoodMenu newMenu = new FoodMenu(MenuName);
+
+            if (da.menuExists(newMenu))
+            {
+                MessageBox.Show("Menu is already in the list");
+                return;
+            }
+
+            da.insertMenu(newMenu);
+
+            this.MenuName = "";
+
+            MenusBinded = new BindableCollection<FoodMenu>(da.GetMenus());
+        }
+
+        public void RemoveMenuButton()
+        {
+            DataAccess da = new DataAccess();
+            da.deleteMenu(SelectedMenu);
+
+            MenusBinded = new BindableCollection<FoodMenu>(da.GetMenus());
         }
     }
 }
