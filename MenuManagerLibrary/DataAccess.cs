@@ -218,5 +218,21 @@ namespace MenuManagerLibrary
                 return output;
             }
         }
+
+        public void AddDishToCategory(Category category, Dish dish)
+        {
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("MenuManagerDB")))
+            {
+                connection.Execute($"INSERT INTO dbo.DishesInCategory VALUES ({category.CategoryId}, {dish.DishId})");
+            }
+        }
+
+        public void RemoveDishFromCategory(Category category, Dish dish)
+        {
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("MenuManagerDB")))
+            {
+                connection.Execute($"DELETE FROM dbo.DishesInCategory WHERE (CategoryId = {category.CategoryId} AND DishId = {dish.DishId})");
+            }
+        }
     }
 }

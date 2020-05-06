@@ -6,6 +6,7 @@ using MenuManagerLibrary;
 using System.Windows;
 using System.Linq;
 using System.Windows.Documents;
+using System.Linq.Expressions;
 
 namespace MenuManagerWpfUi.ViewModels
 {
@@ -105,55 +106,51 @@ namespace MenuManagerWpfUi.ViewModels
             {
                 MessageBox.Show("Please, select a category");
                 return;
-            } 
-            
-            if (SelectedCategory.ListOfDishes.Contains(SelectedDish))
+            }
+
+            DataAccess da = new DataAccess();
+            List<Dish> dishesInCategory = da.GetDishesBasedOnCategoryId(SelectedCategory);
+
+            if (dishesInCategory.Contains(SelectedDish))
             {
                 MessageBox.Show("The dish is already in the list");
                 return;
             }
 
-            if (SelectedMenu.Categories[0].ListOfDishes.Contains(SelectedDish) == false)
-            {
-                SelectedMenu.Categories[0].ListOfDishes.Add(SelectedDish);
-            }
+            da.AddDishToCategory(SelectedCategory, SelectedDish);
 
-            if(SelectedCategory != SelectedMenu.Categories[0])
-            {
-                SelectedCategory.ListOfDishes.Add(SelectedDish);
-            }
-
-            MenuDishesBinded = DataHandler.UpdateBindableCollectionDish(SelectedCategory.ListOfDishes);
+            UpdateMenuDishesBinded(SelectedCategory, da);
 
         }
 
         public void RemoveDishFromCategory()
         {
             Dish SelectedDishCopy = SelectedDish;
+            DataAccess da = new DataAccess();
+            //if(SelectedCategory == SelectedMenu.Categories[0])
+            //{
+            //    foreach (Category category in SelectedMenu.Categories)
+            //    {
+            //        category.ListOfDishes.Remove(SelectedDish);  
+            //    }
 
-            if(SelectedCategory == SelectedMenu.Categories[0])
-            {
-                foreach (Category category in SelectedMenu.Categories)
-                {
-                    category.ListOfDishes.Remove(SelectedDish);  
-                }
+            //    MenuDishesBinded = DataHandler.UpdateBindableCollectionDish(SelectedCategory.ListOfDishes);
+            //    SelectedDish = SelectedDishCopy;
+            //    return;
+            //}
 
-                MenuDishesBinded = DataHandler.UpdateBindableCollectionDish(SelectedCategory.ListOfDishes);
-                SelectedDish = SelectedDishCopy;
-                return;
-            }
-
-            if (SelectedCategory.ListOfDishes.Contains(SelectedDish))
-            {
-                SelectedCategory.ListOfDishes.Remove(SelectedDish);
-                NotifyOfPropertyChange((() => AllDishesBinded));
-                MenuDishesBinded = DataHandler.UpdateBindableCollectionDish(SelectedCategory.ListOfDishes);
-                SelectedDish = SelectedDishCopy;
-                return;
-            }
-
-
-            MessageBox.Show("The dish is not in the list");
+            //if (SelectedCategory.ListOfDishes.Contains(SelectedDish))
+            //{
+            //    SelectedCategory.ListOfDishes.Remove(SelectedDish);
+            //    NotifyOfPropertyChange((() => AllDishesBinded));
+            //    MenuDishesBinded = DataHandler.UpdateBindableCollectionDish(SelectedCategory.ListOfDishes);
+            //    SelectedDish = SelectedDishCopy;
+            //    return;
+            //}
+            da.RemoveDishFromCategory(SelectedCategory, SelectedDish);
+            UpdateMenuDishesBinded(SelectedCategory, da);
+            SelectedDish = SelectedDishCopy;
+            //MessageBox.Show("The dish is not in the list");
         }
 
         public void AddCategory()
@@ -191,7 +188,7 @@ namespace MenuManagerWpfUi.ViewModels
                 return;
             }
 
-            if(SelectedCategory == SelectedMenu.Categories[0])
+            if (SelectedCategory == SelectedMenu.Categories[0])
             {
                 MessageBox.Show("Can't remove this category");
                 return;
