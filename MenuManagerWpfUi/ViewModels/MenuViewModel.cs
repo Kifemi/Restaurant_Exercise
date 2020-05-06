@@ -1,9 +1,11 @@
-﻿//using System;
-//using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 //using System.Text;
 using Caliburn.Micro;
 using MenuManagerLibrary;
 using System.Windows;
+using System.Linq;
+using System.Windows.Documents;
 
 namespace MenuManagerWpfUi.ViewModels
 {
@@ -72,21 +74,11 @@ namespace MenuManagerWpfUi.ViewModels
         {
             get { return _selectedCategory; }
             set 
-            { 
-                if(value == null)
-                {
-                    return;
-                }
-               
+            {
                 _selectedCategory = value;
-                
+                DataAccess da = new DataAccess();
+                UpdateMenuDishesBinded(SelectedCategory, da);
 
-                if (SelectedCategory == SelectedMenu.Categories[0])
-                {
-                    SelectedMenu.Categories[0].ListOfDishes = DataHandler.UpdateMenuDishList(SelectedMenu);
-                }
-
-                MenuDishesBinded = DataHandler.UpdateBindableCollectionDish(value.ListOfDishes);
                 NotifyOfPropertyChange(() => SelectedCategory);
             }
         }
@@ -99,11 +91,9 @@ namespace MenuManagerWpfUi.ViewModels
             DataAccess da = new DataAccess();
             SelectedMenuManager = menuManager;
             SelectedMenu = menu;
+            CategoriesBinded = new BindableCollection<Category>(da.GetCategoriesBasedOnMenuId(SelectedMenu));
             AllDishesBinded = new BindableCollection<Dish>(da.GetDishes());
-            MenuDishesBinded = new BindableCollection<Dish>(DataHandler.UpdateMenuDishList(SelectedMenu));
-            //CategoriesBinded = new BindableCollection<Category>(SelectedMenu.Categories);
-            CategoriesBinded = new BindableCollection<Category>(da.GetCategories());
-            //SelectedCategory = SelectedMenu.Categories[0];
+            MenuDishesBinded = new BindableCollection<Dish>();
         }
         
 
@@ -166,27 +156,33 @@ namespace MenuManagerWpfUi.ViewModels
             MessageBox.Show("The dish is not in the list");
         }
 
-        //public void AddCategory()
-        //{
-        //    if (Utilities.CheckNameValidity(CategoryName) == false)
-        //    {
-        //        MessageBox.Show("Invalid name");
-        //        return;
-        //    }
+        public void AddCategory()
+        {
+            if (Utilities.CheckNameValidity(CategoryName) == false)
+            {
+                MessageBox.Show("Invalid name");
+                return;
+            }
+            DataAccess da = new DataAccess();
 
-        //    CategoryName = Utilities.UpperCaseFirstLetter(Utilities.TrimLowerCaseString(CategoryName));
-        //    Category newCategory = new Category(CategoryName);
+            CategoryName = Utilities.UpperCaseFirstLetter(Utilities.TrimLowerCaseString(CategoryName));
+            Category newCategory = new Category(CategoryName);
 
-        //    if (SelectedMenu.Categories.Contains(newCategory))
-        //    {
-        //        MessageBox.Show("The category already exists");
-        //    }
-        //    else
-        //    {
-        //        this.CategoriesBinded.Add(newCategory);
-        //        DataHandler.UpdateAllCategories(SelectedMenu, CategoriesBinded);
-        //    }
-        //}
+            if (da.categoryExists(newCategory))
+            {
+                MessageBox.Show("Category is already in the list");
+                return;
+            }
+
+            da.insertCategory(newCategory);
+            // Update the newCategoryID
+            da.insertMenuCategory(SelectedMenu, newCategory);
+
+            this.CategoryName = "";
+
+            CategoriesBinded = new BindableCollection<Category>(da.GetCategoriesBasedOnMenuId(SelectedMenu));
+
+        }
 
         public void RemoveCategory()
         {
@@ -233,6 +229,17 @@ namespace MenuManagerWpfUi.ViewModels
             CategoriesBinded.Clear();
             CategoriesBinded = new BindableCollection<Category>(SelectedMenu.Categories);
         }
+
+        public void UpdateCategoryView(FoodMenu menu, DataAccess da)
+        {
+            CategoriesBinded = new BindableCollection<Category>(da.GetCategoriesBasedOnMenuId(menu));
+        }
+
+        public void UpdateMenuDishesBinded(Category category, DataAccess da)
+        {
+            MenuDishesBinded = new BindableCollection<Dish>(da.GetDishesBasedOnCategoryId(category));
+        }
+        
     }
 }
 

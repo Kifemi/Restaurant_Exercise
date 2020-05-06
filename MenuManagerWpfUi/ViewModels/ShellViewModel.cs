@@ -47,7 +47,6 @@ namespace MenuManagerWpfUi.ViewModels
             set
             {
                 _selectedMenu = value;
-                NotifyOfPropertyChange(() => SelectedMenu);
                 if(value == null)
                 {
                     return;

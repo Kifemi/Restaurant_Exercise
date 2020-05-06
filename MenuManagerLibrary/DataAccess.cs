@@ -46,6 +46,8 @@ namespace MenuManagerLibrary
             }
         }
 
+
+
         public void insertDish(Dish dish)
         {
             using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("MenuManagerDB")))
@@ -59,6 +61,14 @@ namespace MenuManagerLibrary
             using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("MenuManagerDB")))
             {
                 connection.Execute("dbo.spFoodMenu_Insert @Name", menu);
+            }
+        }
+
+        public void insertCategory(Category category)
+        {
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("MenuManagerDB")))
+            {
+                connection.Execute("dbo.spCategory_Insert @Name", category);
             }
         }
 
@@ -120,6 +130,22 @@ namespace MenuManagerLibrary
             }
         }
 
+        public bool categoryExists(Category category)
+        {
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("MenuManagerDB")))
+            {
+                var categories = connection.Query<Category>("SELECT * FROM dbo.Category WHERE Name = @Name", category).ToList();
+                if (categories.Count == 0)
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+        }
+
         public void dishDeleteAllergens(Dish dish)
         {
             using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("MenuManagerDB")))
@@ -136,6 +162,14 @@ namespace MenuManagerLibrary
             }
         }
 
+        public void insertMenuCategory(FoodMenu foodMenu, Category category)
+        {
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("MenuManagerDB")))
+            {
+                connection.Execute($"INSERT INTO dbo.MenuCategories VALUES ({foodMenu.FoodMenuId}, {category.CategoryId})");
+            }
+        }
+
         public List<Allergen> GetAllergensBasedOnDishId(Dish dish)
         {
             using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("MenuManagerDB")))
@@ -149,6 +183,38 @@ namespace MenuManagerLibrary
                     output.AddRange(connection.Query<Allergen>($"SELECT * FROM dbo.Allergen WHERE AllergenId = {id}").ToList());
                 }
 
+                return output;
+            }
+        }
+
+        public List<Category> GetCategoriesBasedOnMenuId(FoodMenu menu)
+        {
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("MenuManagerDB")))
+            {
+                List<Category> output = new List<Category>();
+
+                var categoryIds = connection.Query<int>("SELECT CategoryId FROM MenuCategories WHERE FoodMenuId = @FoodMenuId", menu).ToList();
+
+                foreach (int id in categoryIds)
+                {
+                    output.AddRange(connection.Query<Category>($"SELECT * FROM dbo.Category WHERE CategoryId = {id}").ToList());
+                }
+                return output;
+            }
+        }
+
+        public List<Dish> GetDishesBasedOnCategoryId(Category category)
+        {
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("MenuManagerDB")))
+            {
+                List<Dish> output = new List<Dish>();
+
+                var DishIds = connection.Query<int>("SELECT DishId FROM DishesInCategory WHERE CategoryId = @CategoryId", category).ToList();
+
+                foreach (int id in DishIds)
+                {
+                    output.AddRange(connection.Query<Dish>($"SELECT * FROM dbo.Dish WHERE DishId = {id}").ToList());
+                }
                 return output;
             }
         }

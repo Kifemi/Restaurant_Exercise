@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using MenuManagerLibrary.Models;
 //using System.Text;
 
 namespace MenuManagerLibrary
@@ -35,19 +36,19 @@ namespace MenuManagerLibrary
 			set { listOfDishes = value; }
 		}
 
-		public Category(int categoryId, string name)
+
+		// Constructors
+
+		public Category(string name)
 		{
-			this.CategoryId = categoryId;
 			this.Name = name;
-			this.ListOfDishes = new List<Dish>();
 		}
 
-		public Category(int categoryId, string name, int menuId)
+		public Category(int CategoryId, string name)
 		{
-			this.CategoryId = categoryId;
+			this.CategoryId = CategoryId;
 			this.Name = name;
-			this.ListOfDishes = new List<Dish>();
-			this.MenuId = MenuId;
+			//this.ListOfDishes = new List<Dish>();
 		}
 
 		// Overrides
